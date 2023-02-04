@@ -38,9 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Behind
+    uniqueID: 618116989
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Root
     uniqueID: 3845909591
+    locked: 0
+  - name: Tree
+    uniqueID: 2923511505
     locked: 0
