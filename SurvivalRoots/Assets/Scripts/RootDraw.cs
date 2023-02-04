@@ -69,9 +69,9 @@ public class RootDraw : MonoBehaviour
         for(int i=1; i<points.Length; i++)
         {
             totalDelta = (points[i - 1] - points[i]).magnitude;
-            delta = totalDelta - remainingDistance;
+            delta = totalDelta;
 
-            while (delta > step)
+            while (delta > step - remainingDistance)
             {
                 delta -= step;
                 remainingDistance = 0;
