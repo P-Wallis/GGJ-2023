@@ -6,6 +6,7 @@ public class RootCollision
 {
     public RootLine parent = null;
     public Vector2 point;
+    public int pointIndex;
     public float radius;
     public float maxRadius;
 }
