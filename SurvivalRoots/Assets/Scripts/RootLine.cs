@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class RootLine : MonoBehaviour
 {
+    public Transform testDot;
     public LineRenderer rootLine;
     float resamplingSize = 0.001f;
     float resamplingNoise = 0.01f;
     float maxLength = 5;
-    Vector3[] points;
+    protected Vector3[] points;
+    public List<Vector3> pathToTree;
     Bounds bounds;
-    RootLine parent;
+    protected RootLine parent;
     private int childLevel = 0;
     public int ChildLevel { get { return childLevel; } }
 
@@ -25,6 +27,7 @@ public class RootLine : MonoBehaviour
         listPoints.AddRange(playerPoints);
         points = GetRootPoints(listPoints);
         CalculateBounds();
+        CalculatePathToTree();
 
         if(parent != null)
         {
@@ -44,6 +47,7 @@ public class RootLine : MonoBehaviour
             return null;
         }
 
+        int minNodeIndex = -1;
         Vector2 minNode = Vector2.zero;
         float minDist = Mathf.Infinity;
         float dist;
@@ -54,6 +58,7 @@ public class RootLine : MonoBehaviour
             {
                 minDist = dist;
                 minNode = points[i];
+                minNodeIndex = i;
             }
         }
 
@@ -67,6 +72,7 @@ public class RootLine : MonoBehaviour
             parent = this,
             radius = minDist,
             point = minNode,
+            pointIndex = minNodeIndex,
             maxRadius = radius
         };
 
@@ -80,6 +86,33 @@ public class RootLine : MonoBehaviour
         {
             bounds.Encapsulate(point);
         }    
+    }
+
+    void CalculatePathToTree()
+    {
+        List<Vector3> path = new List<Vector3>();
+        for(int i = points.Length-1; i>=0; i--)
+        {
+            path.Add(points[i]);
+        }
+
+        RootLine parentRoot = parent;
+        while(parentRoot != null)
+        {
+            RootCollision hit = parentRoot.GetCollision(path[path.Count - 1], 0.1f);
+            if(hit==null)
+            {
+                break;
+            }
+            for (int i = hit.pointIndex; i >= 0; i--)
+            {
+                path.Add(parentRoot.points[i]);
+            }
+            parentRoot = parentRoot.parent;
+        }
+
+        float step = resamplingSize * maxLength * 2;
+        pathToTree = ResamplePoints(path, step);
     }
 
     Vector3[] GetRootPoints(List<Vector3> points)
@@ -168,6 +201,29 @@ public class RootLine : MonoBehaviour
             rootLine.widthCurve = curve;
             percent += Time.deltaTime;
             yield return null;
+        }
+
+        yield return StartCoroutine(AnimateOnPathToTree());
+    }
+
+    IEnumerator AnimateOnPathToTree()
+    {
+        float dt = 20f / pathToTree.Count;
+        while (true)
+        {
+            float percent = 0;
+            float division;
+            int indexL, indexH;
+            while (percent < 1)
+            {
+                division = percent * (pathToTree.Count - 1);
+                indexL = Mathf.FloorToInt(division);
+                indexH = Mathf.CeilToInt(division);
+                testDot.position = Vector3.Lerp(pathToTree[indexL], pathToTree[indexH], indexH - indexL > 0 ? (division - indexL) / (indexH - indexL) : 1);
+
+                percent += Time.deltaTime * dt;
+                yield return null;
+            }
         }
     }
 }
