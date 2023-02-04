@@ -5,6 +5,7 @@ using UnityEngine;
 public class RootLine : MonoBehaviour
 {
     public Transform testDot;
+    private Sprite testDotSprite;
     public LineRenderer rootLine;
     float resamplingSize = 0.001f;
     float resamplingNoise = 0.01f;
@@ -16,7 +17,7 @@ public class RootLine : MonoBehaviour
     private int childLevel = 0;
     public int ChildLevel { get { return childLevel; } }
 
-    public void Init(RootLine parent, Vector3[] playerPoints, float maxLength, float resamplingSize, float resamplingNoise)
+    public void Init(RootLine parent, Vector3[] playerPoints, List<CollectableSpot> collectables, float maxLength, float resamplingSize, float resamplingNoise)
     {
         this.parent = parent;
         this.maxLength = maxLength;
@@ -28,6 +29,8 @@ public class RootLine : MonoBehaviour
         points = GetRootPoints(listPoints);
         CalculateBounds();
         CalculatePathToTree();
+
+        testDotSprite = testDot.GetComponent<Sprite>();
 
         if(parent != null)
         {
@@ -77,6 +80,14 @@ public class RootLine : MonoBehaviour
         };
 
         return collision;
+    }
+
+    void FindSpots(List<CollectableSpot> collectables)
+    {
+        for(int c=0; c<collectables.Count; c++)
+        {
+
+        }
     }
 
     void CalculateBounds()

@@ -10,6 +10,7 @@ public class RootDraw : MonoBehaviour
     public GameObject cursor;
     public Transform[] startNodes;
 
+    [Range(0, 1)] public float rootStartWidth = 0.2f;
     [Range(0,10)]public float maxLength = 5;
     [Range(0, 5)] public float startRadius = 1;
     [Range(0, 5)] public float rootRadius = 1;
@@ -25,6 +26,8 @@ public class RootDraw : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        playerLine.widthMultiplier = 1.5f * rootStartWidth;
+        rootLinePrefab.rootLine.widthMultiplier = rootStartWidth;
         cursor.transform.localScale = Vector3.one * (startRadius * 2);
     }
 
