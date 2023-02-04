@@ -981,7 +981,9 @@ MonoBehaviour:
   - {fileID: 813510944}
   - {fileID: 248837644}
   - {fileID: 334258226}
-  rootStartWidth: 0.4
+  collectables:
+  - {fileID: 1996648408}
+  rootStartWidth: 0.2
   maxLength: 5
   startRadius: 0.8
   rootRadius: 0.4
@@ -1325,6 +1327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spotCollider: {fileID: 1996648405}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  resourcePrefab: {fileID: 964721014562655921, guid: 1991a09f2d0084958bc0afe90e8b174d, type: 3}
 --- !u!4 &1996648409
 Transform:
   m_ObjectHideFlags: 0
@@ -1333,7 +1337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996648404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.30797505, y: -0.352232, z: 0}
+  m_LocalPosition: {x: -7.96, y: -0.352232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
