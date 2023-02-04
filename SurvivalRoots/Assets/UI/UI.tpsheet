@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:b0f94249e2dfd6225b1d6668509cfc25:043cc652d1683cf62e2ec185b760e23f:64d56465927d50bb5400e4c66dc46a97$
+#
+:format=40300
+:texture=UI.png
+:size=256x512
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+calendar;126;323;118;112; 0.5042372881355932;0.5; 0;0;0;0
+mineral_minus;191;285;51;36; 0.5;0.5; 0;0;0;0
+mineral_plus;191;247;51;36; 0.5;0.5; 0;0;0;0
+mineralcounter;1;213;28;38; 0.5;0.5; 0;0;0;0
+mineralcounter_empty;31;213;28;38; 0.5;0.5; 0;0;0;0
+mineralcounter_full;96;218;28;38; 0.5;0.5; 0;0;0;0
+pointer_down;74;314;43;45; 0.5;0.5; 0;0;0;0
+pointer_up;74;264;42;48; 0.5;0.5; 0;0;0;0
+sun_down;127;437;123;74; 0.5;0.5; 0;0;0;0
+sun_mid;1;361;123;74; 0.5;0.5; 0;0;0;0
+sun_up;1;437;124;74; 0.5;0.5; 0;0;0;0
+water_minus;119;258;70;63; 0.5;0.5; 0;0;0;0
+water_plus;1;296;71;63; 0.5;0.5; 0;0;0;0
+watercounter_empty;1;253;30;41; 0.5;0.5; 0;0;0;0
+watercounter_full;65;221;29;41; 0.5;0.5; 0;0;0;0
+watercounter_half;33;253;30;41; 0.5;0.5; 0;0;0;0
