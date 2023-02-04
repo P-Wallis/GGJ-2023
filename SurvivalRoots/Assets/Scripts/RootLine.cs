@@ -11,6 +11,8 @@ public class RootLine : MonoBehaviour
     Vector3[] points;
     Bounds bounds;
     RootLine parent;
+    private int childLevel = 0;
+    public int ChildLevel { get { return childLevel; } }
 
     public void Init(RootLine parent, Vector3[] playerPoints, float maxLength, float resamplingSize, float resamplingNoise)
     {
@@ -27,6 +29,7 @@ public class RootLine : MonoBehaviour
         if(parent != null)
         {
             rootLine.widthMultiplier = parent.rootLine.widthMultiplier / 2f;
+            childLevel = parent.ChildLevel + 1;
         }
 
         if (rootDrawAnimation != null)

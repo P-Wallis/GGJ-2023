@@ -13,6 +13,7 @@ public class RootDraw : MonoBehaviour
     [Range(0,10)]public float maxLength = 5;
     [Range(0, 5)] public float startRadius = 1;
     [Range(0, 5)] public float rootRadius = 1;
+    [Range(0, 5)] public int maxChildIndex = 2;
     private float currentLength = 0;
     [Range(0.000001f, 0.01f)] public float resamplingSize = 0.001f;
     [Range(0, 0.05f)] public float resamplingNoise = 0.01f;
@@ -31,20 +32,20 @@ public class RootDraw : MonoBehaviour
     private void Update()
     {
         Vector2 pos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        RootCollision collision = GetCollision(pos);
-        bool canDraw = collision != null;
+        RootCollision rootStart = GetRootStartPoint(pos);
+        bool canDraw = rootStart != null;
 
         cursor.SetActive(canDraw);
         if (canDraw)
         {
-            cursor.transform.localScale = Vector3.one * (collision.maxRadius * 2);
-            cursor.transform.position = collision.point;
+            cursor.transform.localScale = Vector3.one * (rootStart.maxRadius * 2);
+            cursor.transform.position = rootStart.point;
 
             if (Input.GetMouseButtonDown(0))
             {
-                currentRootStart = collision;
+                currentRootStart = rootStart;
                 playerLine.positionCount = 1;
-                playerLine.SetPosition(0, collision.point);
+                playerLine.SetPosition(0, rootStart.point);
                 currentLength = 0;
                 isDrawing = true;
             }
@@ -78,13 +79,13 @@ public class RootDraw : MonoBehaviour
         }
     }
 
-    RootCollision GetCollision(Vector2 pos)
+    RootCollision GetRootStartPoint(Vector2 mousePos)
     {
         RootCollision collision;
         for (int i=0; i<roots.Count; i++)
         {
-            collision = roots[i].GetCollision(pos, rootRadius);
-            if(collision != null)
+            collision = roots[i].GetCollision(mousePos, rootRadius);
+            if(collision != null && collision.parent.ChildLevel < maxChildIndex)
             {
                 return collision;
             }
@@ -95,7 +96,7 @@ public class RootDraw : MonoBehaviour
         float dist;
         for (int i = 0; i < startNodes.Length; i++)
         {
-            dist = Vector2.Distance(pos, startNodes[i].position);
+            dist = Vector2.Distance(mousePos, startNodes[i].position);
             if (dist < minDist)
             {
                 minDist = dist;

@@ -981,9 +981,10 @@ MonoBehaviour:
   - {fileID: 813510944}
   - {fileID: 248837644}
   - {fileID: 334258226}
-  maxLength: 10
+  maxLength: 5
   startRadius: 0.5
   rootRadius: 0.3
+  maxChildren: 2
   resamplingSize: 0.01
   resamplingNoise: 0.0276
 --- !u!1 &1247345237
