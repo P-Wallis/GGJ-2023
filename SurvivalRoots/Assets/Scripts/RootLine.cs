@@ -38,7 +38,7 @@ public class RootLine : MonoBehaviour
         if (parent != null)
         {
             childLevel = parent.ChildLevel + 1;
-            widthMultiplier = width / (2f * childLevel);
+            widthMultiplier = width / (1.25f * childLevel);
         }
         else
         {
