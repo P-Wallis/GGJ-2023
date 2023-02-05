@@ -1149,8 +1149,7 @@ MonoBehaviour:
   - {fileID: 813510944}
   - {fileID: 248837644}
   - {fileID: 334258226}
-  - {fileID: 1042876525}
-  - {fileID: 151959438}
+<<<<<<< HEAD
   collectables:
   - {fileID: 1996648408}
   rootStartWidth: 0.2
@@ -1158,6 +1157,14 @@ MonoBehaviour:
   startRadius: 0.8
   rootRadius: 0.4
   maxChildIndex: 3
+=======
+  - {fileID: 1042876525}
+  - {fileID: 151959438}
+  maxLength: 5
+  startRadius: 0.5
+  rootRadius: 0.3
+  maxChildIndex: 2
+>>>>>>> 3d1f89295b3031c01a8e7f68dd87a414c6b9b038
   resamplingSize: 0.01
   resamplingNoise: 0.0276
 --- !u!1 &1894126058
@@ -1175,7 +1182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1894126059
 Transform:
   m_ObjectHideFlags: 0
@@ -1199,6 +1206,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1996648404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,7 +1424,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spotCollider: {fileID: 1996648405}
   color: {r: 1, g: 1, b: 1, a: 1}
-  spots: []
   resourcePrefab: {fileID: 964721014562655921, guid: 1991a09f2d0084958bc0afe90e8b174d, type: 3}
 --- !u!4 &1996648409
 Transform:
@@ -1433,6 +1440,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
 --- !u!1001 &7538103697971832277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1490,3 +1498,4 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04be440d8619b02478fd73db3a299343, type: 3}
+>>>>>>> 3d1f89295b3031c01a8e7f68dd87a414c6b9b038

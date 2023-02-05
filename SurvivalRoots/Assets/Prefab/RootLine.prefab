@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9392e7558694e65a8e11ee97384331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDot: {fileID: 0}
   rootLine: {fileID: 143138835190325924}
   pathToTree: []
 --- !u!120 &143138835190325924
@@ -94,7 +93,7 @@ LineRenderer:
   - {x: 0, y: 1.32, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.4
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
