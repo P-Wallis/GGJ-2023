@@ -137,8 +137,16 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 4f8a0644fe6224715a82fad59242cc21
+    name: Ambience
+  - guid: de708cfbd21e74f4989355636f735c40
+    name: MusicBackgroundVolume
+  - guid: 9cd91b59d61d94a10bffd931f5051f97
+    name: MusicDangerVolume
   - guid: 2e733183b21344f41b053811fd234e6b
     name: MusicGrowingVolume
+  - guid: 8f95e0d24899a474e9b9d8a748315229
+    name: SFX
   m_AudioMixerGroupViews:
   - guids:
     - fbd20b8e5223844cabdacb7ca75db7ee
