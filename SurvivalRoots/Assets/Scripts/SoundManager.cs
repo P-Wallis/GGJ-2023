@@ -11,6 +11,13 @@ public enum SFX
     SUCCESS
 }
 
+public enum MusicTrack
+{
+    BACKGROUND,
+    DANGER,
+    GROWING
+}
+
 public class SoundManager : MonoBehaviour
 {
     [System.Serializable]
@@ -52,6 +59,9 @@ public class SoundManager : MonoBehaviour
     public AudioMixer mixer;
 
     private Dictionary<SFX, AudioSource> sfxDict = new Dictionary<SFX, AudioSource>();
+    private MusicTrack track = MusicTrack.BACKGROUND;
+    private MusicTrack oldTrack = MusicTrack.BACKGROUND;
+
 
     private void Start()
     {
@@ -77,6 +87,61 @@ public class SoundManager : MonoBehaviour
         {
             sfxDict[fx].Play();
         }
+    }
+
+    Coroutine musicTransitionAnimation;
+    public void TransitionMusicTo(MusicTrack newMusic)
+    {
+        if (track == newMusic)
+        {
+            return;
+        }
+
+        if (musicTransitionAnimation != null)
+        {
+            StopCoroutine(musicTransitionAnimation);
+            mixer.SetFloat(GetMusicParameter(oldTrack), -80);
+        }
+        musicTransitionAnimation = StartCoroutine(CoTransitionMusic(track, newMusic));
+
+    }
+
+    string GetMusicParameter(MusicTrack musicTrack)
+    {
+        switch (musicTrack)
+        {
+            case MusicTrack.BACKGROUND:
+                return music.backgroundMixerVolumeParameter;
+
+            case MusicTrack.DANGER:
+                return music.dangerMixerVolumeParameter;
+
+            case MusicTrack.GROWING:
+                return music.growingMixerVolumeParameter;
+        }
+
+        return "";
+    }
+
+    IEnumerator CoTransitionMusic(MusicTrack from, MusicTrack to)
+    {
+        oldTrack = from;
+        track = to;
+
+        string fromParam = GetMusicParameter(from), toParam = GetMusicParameter(to);
+        AnimationCurve smoothCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+        float percent = 0;
+        while (percent < 1)
+        {
+            mixer.SetFloat(fromParam, Mathf.Lerp(0, -80, smoothCurve.Evaluate(percent)));
+            mixer.SetFloat(toParam, Mathf.Lerp(-80, 0, smoothCurve.Evaluate(percent)));
+
+            percent += Time.deltaTime;
+            yield return null;
+        }
+
+        mixer.SetFloat(fromParam, -80);
+        mixer.SetFloat(toParam, 0);
     }
 
     AudioSource MakeSound(AudioClip clip, AudioMixerGroup mixerGroup, string volumeParameter = null, float mixerVolume = 0, bool play = false, bool loop = false)
