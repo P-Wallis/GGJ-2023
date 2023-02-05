@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffects:
     gathering: {fileID: 8300000, guid: b279179e3c7a09043a888ac30c124d25, type: 3}
+    growing: {fileID: 8300000, guid: ce3a71078408ea54a87d8c132279282d, type: 3}
     breaking: {fileID: 8300000, guid: a1844e67cfdbfce44a930602307ea571, type: 3}
     success: {fileID: 8300000, guid: 75a9a741ae96d4a46b28cdb6097cf9b8, type: 3}
     effectsMixer: {fileID: -3005388615347964479, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
