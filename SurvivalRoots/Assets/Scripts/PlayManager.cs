@@ -78,6 +78,7 @@ public class PlayManager : MonoBehaviour
                 rad += randomOffset;
                 Vector2 pos = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * radius;
                 pos += Random.insideUnitCircle * posjitter;
+                Quaternion randAngle = Quaternion.Euler(0, 0, Random.Range(-180f, 180));
 
                 if (Random.value < 0.7f)
                 {
@@ -88,7 +89,14 @@ public class PlayManager : MonoBehaviour
                     }
                     else
                     {
-                        Instantiate(rock, pos, Quaternion.identity, transform);
+                        if (Random.value < 0.7f)
+                        {
+                            Instantiate(plants[Random.Range(0,plants.Length)], pos, randAngle, transform);
+                        }
+                        else
+                        {
+                            Instantiate(rock, pos, randAngle, transform);
+                        }
                     }
                 }
                 else

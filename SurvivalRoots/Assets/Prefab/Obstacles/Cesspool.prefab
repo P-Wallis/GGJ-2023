@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.89, y: -3.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   spotCollider: {fileID: 4292559167430644669}
   resourcePrefab: {fileID: 4370166030542155653, guid: 00f655b9fdc882143b751be40e29ff70, type: 3}
   type: 3
+  startingResources: 4
 --- !u!60 &4292559167430644669
 PolygonCollider2D:
   m_ObjectHideFlags: 0

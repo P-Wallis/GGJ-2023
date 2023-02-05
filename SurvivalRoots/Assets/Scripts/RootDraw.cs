@@ -88,10 +88,13 @@ public class RootDraw : MonoBehaviour
                     RootCollision rootStart = GetRootStartPoint(pos, true);
                     bool canDraw = rootStart != null;
 
+                    if(!cursor.activeSelf && canDraw)
+                    {
+                        manager.PlaySFX(SFX.HOVER);
+                    }
                     cursor.SetActive(canDraw);
                     if (canDraw)
                     {
-                        manager.PlaySFX(SFX.HOVER);
                         cursor.transform.localScale = Vector3.one * (rootStart.maxRadius * 2);
                         cursor.transform.position = rootStart.point;
 
