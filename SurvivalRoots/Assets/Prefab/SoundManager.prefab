@@ -49,6 +49,10 @@ MonoBehaviour:
     growing: {fileID: 8300000, guid: ce3a71078408ea54a87d8c132279282d, type: 3}
     breaking: {fileID: 8300000, guid: a1844e67cfdbfce44a930602307ea571, type: 3}
     success: {fileID: 8300000, guid: 75a9a741ae96d4a46b28cdb6097cf9b8, type: 3}
+    error: {fileID: 8300000, guid: f7858c5baba5b8142897ee40f631a972, type: 3}
+    hover: {fileID: 8300000, guid: afb20ff9e76888e4094fc353832fa728, type: 3}
+    click: {fileID: 8300000, guid: efefdc23193b59a49bb1f8d676e30646, type: 3}
+    sunrise: {fileID: 8300000, guid: ab448e551fe91294cbd7f6c1ba27b923, type: 3}
     effectsMixer: {fileID: -3005388615347964479, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
     effectsMixerVolumeParameter: SFX
   music:
