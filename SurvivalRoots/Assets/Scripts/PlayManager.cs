@@ -31,6 +31,7 @@ public class PlayManager : MonoBehaviour
         ui.mineralMeter.SetValue(minerals);
 
         ui.dayVisualizer.SetTime(TimeOfDay.DAWN);
+        drawer.maxChildIndex = 0;
 
         ui.endTurnButton.onClick.AddListener(EndTurn);
         ui.resetButton.onClick.AddListener(drawer.Reset);
@@ -55,7 +56,23 @@ public class PlayManager : MonoBehaviour
         phase = GamePhase.WORLD_UPDATES;
         yield return new WaitForSeconds(1);
         phase = GamePhase.PLAYER_ACTION;
-        ui.dayVisualizer.AdvanceTimeOfDay();
+
+        bool dayRollover = ui.dayVisualizer.AdvanceTimeOfDay();
+        if(dayRollover)
+        {
+            if (drawer.maxChildIndex < 5 && minerals >= 1)
+            {
+                SpendResources(ResourceType.MINERAL);
+                drawer.maxChildIndex++;
+            }
+
+            if (water < 4 && minerals >= 1)
+            {
+                SpendResources(ResourceType.MINERAL);
+                RefundResources(ResourceType.WATER);
+            }
+        }
+
         ui.endTurnButton.interactable = true;
         ui.resetButton.interactable = true;
 

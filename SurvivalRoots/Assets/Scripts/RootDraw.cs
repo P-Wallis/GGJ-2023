@@ -17,7 +17,7 @@ public class RootDraw : MonoBehaviour
     [Range(0,10)]public float maxLength = 5;
     [Range(0, 5)] public float startRadius = 1;
     [Range(0, 5)] public float rootRadius = 1;
-    [Range(0, 5)] public int maxChildIndex = 2;
+    [HideInInspector] public int maxChildIndex = 0;
     private float currentLength = 0;
     [Range(0.000001f, 0.01f)] public float resamplingSize = 0.001f;
     [Range(0, 0.05f)] public float resamplingNoise = 0.01f;

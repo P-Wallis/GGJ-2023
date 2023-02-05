@@ -21,8 +21,10 @@ public class DayVisualizer : MonoBehaviour
     public TextMeshProUGUI dayText;
     private int day = 1;
 
-    public void AdvanceTimeOfDay()
+    public bool AdvanceTimeOfDay()
     {
+        bool rollover = false;
+
         if(time == TimeOfDay.DUSK)
         {
             if(day == 30)
@@ -34,6 +36,7 @@ public class DayVisualizer : MonoBehaviour
                 day += 1;
             }
             time = TimeOfDay.DAWN;
+            rollover = true;
         }
         else
         {
@@ -41,6 +44,7 @@ public class DayVisualizer : MonoBehaviour
         }
 
         SetTime(time);
+        return rollover;
     }
 
     public void SetTime(TimeOfDay time)
