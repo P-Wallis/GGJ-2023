@@ -19,6 +19,7 @@ public class PlayManager : MonoBehaviour
     public RootDraw drawer;
 
     [Header("Object Generation")]
+    [Range(0, 10)] public int maxDeathPools;
     public CollectableSpot waterPool, mineralChunk, deathPool;
     public GameObject rock;
     public GameObject[] plants;
@@ -27,6 +28,7 @@ public class PlayManager : MonoBehaviour
     [Range(0, 1)] public float posjitter = 1;
     public int rings = 5;
     private List<CollectableSpot> collectables = new List<CollectableSpot>();
+    private List<CollectableSpot> deathPools = new List<CollectableSpot>();
     private List<Collider2D> obstacles = new List<Collider2D>();
 
     private GamePhase phase;
@@ -38,6 +40,8 @@ public class PlayManager : MonoBehaviour
     [Range(0, 4)] public float minerals;
 
     [Range(0,0.1f)]public float increment;
+    [HideInInspector] public float bankedWaterIncrements = 0;
+    [HideInInspector] public float bankedMineralIncrements = 0;
     [Range(0, 4f)] public float waterDailyIncrease = 0.5f;
 
 
@@ -81,10 +85,12 @@ public class PlayManager : MonoBehaviour
     public void DistributeStuff()
     {
         bool good = true;
-        for(int i=1; i<=rings; i++)
+        int deathBudget =  maxDeathPools / (rings/2);
+        for (int i=1; i<=rings; i++)
         {
             float radius = radiusIncrement * i;
             float randomOffset = Random.Range(-Mathf.PI, Mathf.PI);
+            int currentDeaths = 0;
 
             float circumference = radius * 2 * Mathf.PI;
 
@@ -96,39 +102,55 @@ public class PlayManager : MonoBehaviour
                 pos += Random.insideUnitCircle * posjitter;
                 Quaternion randAngle = Quaternion.Euler(0, 0, Random.Range(-180f, 180));
 
-                if (Random.value < 0.7f)
+                if (good)
                 {
-                    if(good)
+                    if (Random.value < 0.7f)
                     {
                         collectables.Add(Instantiate(waterPool, pos, randAngle, transform));
                         collectables[collectables.Count - 1].startingResources = i;
                     }
                     else
                     {
-                        if (Random.value < 0.3f)
-                        {
-                            Instantiate(plants[Random.Range(0,plants.Length)], pos, randAngle, transform);
-                        }
-                        else
-                        {
-                            GameObject rockGO = Instantiate(rock, pos, randAngle, transform);
-                            Collider2D rockCollider = rockGO.GetComponent<PolygonCollider2D>();
-
-                            if(rockCollider != null)
-                            {
-                                obstacles.Add(rockCollider);
-                            }
-                        }
+                        collectables.Add(Instantiate(mineralChunk, pos, Quaternion.identity, transform));
+                        collectables[collectables.Count - 1].startingResources = i;
                     }
                 }
                 else
                 {
-                    collectables.Add(Instantiate(good ? mineralChunk : deathPool, pos, Quaternion.identity, transform));
-                    collectables[collectables.Count - 1].startingResources = i;
+                    if (currentDeaths < deathBudget && (Mathf.Repeat(rad, Mathf.PI * 2) < Mathf.PI / 4 || (Mathf.Repeat(rad - Mathf.PI, Mathf.PI * 2) < Mathf.PI / 4)))
+                    {
+                        CollectableSpot pool = Instantiate(deathPool, pos, Quaternion.identity, transform);
+                        collectables.Add(pool);
+                        deathPools.Add(pool);
+                        currentDeaths++;
+                    }
+                    else
+                    {
+                        PlaceRandomObstacle(pos, randAngle);
+                    }
                 }
             }
 
+
             good = !good;
+        }
+    }
+
+    private void PlaceRandomObstacle(Vector2 pos, Quaternion randAngle)
+    {
+        if (Random.value < 0.3f)
+        {
+            Instantiate(plants[Random.Range(0, plants.Length)], pos, randAngle, transform);
+        }
+        else
+        {
+            GameObject rockGO = Instantiate(rock, pos, randAngle, transform);
+            Collider2D rockCollider = rockGO.GetComponent<PolygonCollider2D>();
+
+            if (rockCollider != null)
+            {
+                obstacles.Add(rockCollider);
+            }
         }
     }
 
@@ -160,28 +182,53 @@ public class PlayManager : MonoBehaviour
         }
 
         // Player
-        phase = GamePhase.PLAYER_ACTION;
+        if (IsSuccess())
         {
+            // End screen
+            Debug.Log("The End");
+        }
+        else
+        {
+            phase = GamePhase.PLAYER_ACTION;
+
             ui.dayVisualizer.AdvanceTimeOfDay();
             soundManager.TransitionMusicTo(MusicTrack.BACKGROUND);
             PlaySFX(SFX.SUNRISE);
 
-            water += waterDailyIncrease;
-            ui.waterMeter.SetValue(water);
-            ui.waterUpdate.Increase();
-
-            if (drawer.maxChildIndex < 5 && minerals >= 2)
+            if (water < 4)
             {
-                SpendResources(ResourceType.MINERAL);
-                SpendResources(ResourceType.MINERAL);
+                water += waterDailyIncrease;
+                ui.waterMeter.SetValue(water);
+                ui.waterUpdate.Increase();
+            }
+
+            if (drawer.maxChildIndex < 5)
+            {
                 drawer.maxChildIndex++;
                 ui.powerLevel.text = (drawer.maxChildIndex + 1).ToString();
             }
 
             ui.endTurnButton.interactable = true;
             ui.resetButton.interactable = true;
+
+
+            water = Mathf.Clamp(water, 0, 4);
+            minerals = Mathf.Clamp(minerals, 0, 4);
+            bankedWaterIncrements = 0;
+            bankedMineralIncrements = 0;
         }
 
+    }
+
+    public bool IsSuccess()
+    {
+        for(int i=0; i<deathPools.Count; i++)
+        {
+            if (deathPool.Resources > 0)
+                return false;
+        }
+
+        return true;
     }
 
     public void OnNotEnoughWater()
@@ -196,16 +243,17 @@ public class PlayManager : MonoBehaviour
             case ResourceType.WATER:
                 water += increment;
                 ui.waterUpdate.Increase();
+                bankedWaterIncrements -= increment;
                 break;
             case ResourceType.MINERAL:
                 minerals += increment;
                 ui.mineralUpdate.Increase();
+                bankedMineralIncrements -= increment;
                 break;
             case ResourceType.SKULL:
-                water -= increment;
                 minerals -= increment;
-                ui.waterUpdate.Decrease();
                 ui.mineralUpdate.Decrease();
+                bankedMineralIncrements += increment;
                 break;
         }
         ui.waterMeter.SetValue(water);
