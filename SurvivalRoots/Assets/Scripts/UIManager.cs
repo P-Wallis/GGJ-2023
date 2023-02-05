@@ -25,4 +25,7 @@ public class UIManager : MonoBehaviour
     public Button resetButton;
     public DayVisualizer dayVisualizer;
     public TextMeshProUGUI powerLevel;
+    public UIRiseAndFade waterUpdate;
+    public UIRiseAndFade mineralUpdate;
+    public UIRiseAndFade noWaterAlert;
 }

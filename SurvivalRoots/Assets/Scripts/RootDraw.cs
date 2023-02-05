@@ -100,7 +100,7 @@ public class RootDraw : MonoBehaviour
                             if (manager.water < 1)
                             {
                                 manager.PlaySFX(SFX.ERROR);
-                                Debug.Log("Not Enough Water");
+                                manager.OnNotEnoughWater();
                             }
                             else
                             {

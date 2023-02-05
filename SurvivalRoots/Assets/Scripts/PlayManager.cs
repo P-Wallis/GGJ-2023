@@ -137,6 +137,7 @@ public class PlayManager : MonoBehaviour
 
             water += waterDailyIncrease;
             ui.waterMeter.SetValue(water);
+            ui.waterUpdate.Increase();
 
             if (drawer.maxChildIndex < 5 && minerals >= 2)
             {
@@ -152,19 +153,28 @@ public class PlayManager : MonoBehaviour
 
     }
 
+    public void OnNotEnoughWater()
+    {
+        ui.noWaterAlert.Animate();
+    }
+
     public void Increment(ResourceType type)
     {
         switch(type)
         {
             case ResourceType.WATER:
                 water += increment;
+                ui.waterUpdate.Increase();
                 break;
             case ResourceType.MINERAL:
                 minerals += increment;
+                ui.mineralUpdate.Increase();
                 break;
             case ResourceType.SKULL:
                 water -= increment;
                 minerals -= increment;
+                ui.waterUpdate.Decrease();
+                ui.mineralUpdate.Decrease();
                 break;
         }
         ui.waterMeter.SetValue(water);
@@ -176,9 +186,11 @@ public class PlayManager : MonoBehaviour
         switch (type)
         {
             case ResourceType.WATER:
+                ui.waterUpdate.Decrease();
                 water -= 1;
                 break;
             case ResourceType.MINERAL:
+                ui.mineralUpdate.Decrease();
                 minerals -= 1;
                 break;
         }
@@ -191,9 +203,11 @@ public class PlayManager : MonoBehaviour
         switch (type)
         {
             case ResourceType.WATER:
+                ui.waterUpdate.Increase();
                 water += 1;
                 break;
             case ResourceType.MINERAL:
+                ui.mineralUpdate.Increase();
                 minerals += 1;
                 break;
         }
