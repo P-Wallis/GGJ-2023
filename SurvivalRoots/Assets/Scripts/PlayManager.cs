@@ -13,7 +13,14 @@ public class PlayManager : MonoBehaviour
 {
     UIManager ui;
     public RootDraw drawer;
-    public List<CollectableSpot> collectables;
+    public CollectableSpot waterPool, mineralChunk, deathPool;
+    public GameObject rock;
+    public GameObject[] plants;
+    public float radiusIncrement = 2;
+    public float objectDensity = 1;
+    [Range(0, 1)] public float posjitter = 1;
+    public int rings = 5;
+    private List<CollectableSpot> collectables = new List<CollectableSpot>();
 
     private GamePhase phase;
     public GamePhase Phase { get { return phase; } }
@@ -37,9 +44,51 @@ public class PlayManager : MonoBehaviour
         ui.endTurnButton.onClick.AddListener(EndTurn);
         ui.resetButton.onClick.AddListener(drawer.Reset);
 
-        foreach(CollectableSpot spot in collectables)
+        DistributeStuff();
+
+        foreach (CollectableSpot spot in collectables)
         {
             spot.Init(this);
+        }
+    }
+
+    public void DistributeStuff()
+    {
+        bool good = true;
+        for(int i=1; i<=rings; i++)
+        {
+            float radius = radiusIncrement * i;
+            float randomOffset = Random.Range(-Mathf.PI, Mathf.PI);
+
+            float circumference = radius * 2 * Mathf.PI;
+
+            for(int o = 0; o<(circumference/objectDensity)-1; o++)
+            {
+                float rad = o * objectDensity * 2 * Mathf.PI / circumference;
+                rad += randomOffset;
+                Vector2 pos = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * radius;
+                pos += Random.insideUnitCircle * posjitter;
+
+                if (Random.value < 0.7f)
+                {
+                    if(good)
+                    {
+                        collectables.Add(Instantiate(waterPool, pos, Quaternion.identity, transform));
+                        collectables[collectables.Count - 1].startingResources = i;
+                    }
+                    else
+                    {
+                        Instantiate(rock, pos, Quaternion.identity, transform);
+                    }
+                }
+                else
+                {
+                    collectables.Add(Instantiate(good ? mineralChunk : deathPool, pos, Quaternion.identity, transform));
+                    collectables[collectables.Count - 1].startingResources = i;
+                }
+            }
+
+            good = !good;
         }
     }
 
