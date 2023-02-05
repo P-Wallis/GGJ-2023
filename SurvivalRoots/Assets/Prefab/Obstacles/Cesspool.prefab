@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8082782442360349980}
   - component: {fileID: 6087232370776494421}
   - component: {fileID: 6566148787196720178}
+  - component: {fileID: 4292559167430644669}
   m_Layer: 0
   m_Name: Cesspool
   m_TagString: Untagged
@@ -97,8 +98,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8214eb8e7194685984be9711822281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotCollider: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  spots: []
+  spotCollider: {fileID: 4292559167430644669}
   resourcePrefab: {fileID: 4370166030542155653, guid: 00f655b9fdc882143b751be40e29ff70, type: 3}
   type: 3
+--- !u!60 &4292559167430644669
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309334974692531609}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.350308, y: 1.64}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.0376554, y: -0.034370847}
+      - {x: 1.1529049, y: 0.20765305}
+      - {x: 1.1759547, y: 0.33442748}
+      - {x: 1.1759547, y: 0.46120188}
+      - {x: 1.1413798, y: 0.58797634}
+      - {x: 0.9915556, y: 0.7032258}
+      - {x: 0.7495317, y: 0.7378006}
+      - {x: 0.023459993, y: 0.8300002}
+      - {x: -0.24161379, y: 0.8300002}
+      - {x: -0.42601296, y: 0.78390044}
+      - {x: -0.58736223, y: 0.6917008}
+      - {x: -0.81786114, y: 0.44967693}
+      - {x: -0.93311065, y: 0.31137758}
+      - {x: -1.1059848, y: 0.06935368}
+      - {x: -1.1751345, y: -0.12657043}
+      - {x: -1.1751345, y: -0.34554443}
+      - {x: -1.1636096, y: -0.3916442}
+      - {x: -1.0137852, y: -0.5184186}
+      - {x: -0.5297375, y: -0.54146856}
+      - {x: -0.2877136, y: -0.57604337}
+      - {x: -0.14941421, y: -0.62214315}
+      - {x: 0.1732843, y: -0.7719675}
+      - {x: 0.27700883, y: -0.80654234}
+      - {x: 0.42683315, y: -0.80654234}
+      - {x: 0.5305577, y: -0.76044255}
+      - {x: 0.6919069, y: -0.61061823}
+      - {x: 0.79563147, y: -0.44926897}

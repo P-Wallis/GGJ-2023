@@ -98,9 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8214eb8e7194685984be9711822281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotCollider: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  spots: []
+  spotCollider: {fileID: 907838991306039818}
   resourcePrefab: {fileID: 4299822380743638612, guid: 23810e64b6b275f4299f7e057a5db721, type: 3}
   type: 1
 --- !u!60 &907838991306039818
