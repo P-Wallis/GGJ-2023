@@ -425,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5638115310038347699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1478,6 +1478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f6bf7cc71b64db8a541ccfef3ec115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instructionsShown: 1
   waterMeter: {fileID: 6197572250982533456}
   mineralMeter: {fileID: 487699105580973373}
   endTurnButton: {fileID: 6653099358298010968}
@@ -1488,6 +1489,10 @@ MonoBehaviour:
   mineralUpdate: {fileID: 3954809309163806797}
   noWaterAlert: {fileID: 4517205788815551082}
   instructions: {fileID: 3997885057493827119}
+  start: {fileID: 7817298697918680233}
+  end: {fileID: 2308692610888968963}
+  endTitle: {fileID: 5512485384069535129}
+  endDescription: {fileID: 8327361749296927989}
 --- !u!114 &4941798591383208014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3054,7 +3059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3674,7 +3679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1065898870515263523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3673855648357944510}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3001016795269260682
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,7 +4659,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3183574289039912113}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3673855648357944510}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4453568194810971843
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,9 +16,11 @@ public class UIManager : MonoBehaviour
         }
 
         instructions.SetActive(instructionsShown);
+        start.SetActive(true);
+        end.SetActive(false);
     }
 
-    bool instructionsShown = true;
+    [HideInInspector] public bool instructionsShown = true;
 
     public ResourcesMeter waterMeter;
     public ResourcesMeter mineralMeter;
@@ -30,6 +32,10 @@ public class UIManager : MonoBehaviour
     public UIRiseAndFade mineralUpdate;
     public UIRiseAndFade noWaterAlert;
     public GameObject instructions;
+    public GameObject start;
+    public GameObject end;
+    public TextMeshProUGUI endTitle;
+    public TextMeshProUGUI endDescription;
 
     private void Update()
     {
@@ -38,5 +44,28 @@ public class UIManager : MonoBehaviour
             instructionsShown = false;
             instructions.SetActive(instructionsShown);
         }
+    }
+
+    public void Play()
+    {
+        start.SetActive(false);
+    }
+
+    public void Win()
+    {
+        end.SetActive(true);
+        endTitle.text = "You Win!";
+    }
+
+    public void Lose()
+    {
+        end.SetActive(true);
+        endTitle.text = "You Lose.";
+        endDescription.gameObject.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -1218,6 +1218,7 @@ MonoBehaviour:
   plants:
   - {fileID: 802536707403226634, guid: d4fb3f53f22d84bbe9e10e808d092e4c, type: 3}
   - {fileID: 8973956021267462838, guid: f8c7d4da33b204fea926b506a8571783, type: 3}
+  - {fileID: 8973956021267462838, guid: 7fdf1d94a948f4442904abed8d54d947, type: 3}
   radiusIncrement: 4
   objectDensity: 3.5
   posjitter: 0.753

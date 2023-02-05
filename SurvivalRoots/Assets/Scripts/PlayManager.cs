@@ -4,9 +4,11 @@ using UnityEngine;
 
 public enum GamePhase
 {
+    INTRO,
     PLAYER_ACTION,
     TREE_GROWTH,
-    WORLD_UPDATES
+    WORLD_UPDATES,
+    OUTRO
 }
 
 public class PlayManager : MonoBehaviour
@@ -32,7 +34,7 @@ public class PlayManager : MonoBehaviour
     private List<CollectableSpot> deathPools = new List<CollectableSpot>();
     private List<Collider2D> obstacles = new List<Collider2D>();
 
-    private GamePhase phase;
+    private GamePhase phase = GamePhase.INTRO;
     public GamePhase Phase { get { return phase; } }
 
 
@@ -80,6 +82,14 @@ public class PlayManager : MonoBehaviour
         foreach (CollectableSpot spot in collectables)
         {
             spot.Init(this);
+        }
+    }
+
+    private void Update()
+    {
+        if(phase == GamePhase.INTRO && ui.instructionsShown == false)
+        {
+            phase = GamePhase.PLAYER_ACTION;
         }
     }
 
@@ -189,12 +199,14 @@ public class PlayManager : MonoBehaviour
             PlaySFX(SFX.SUCCESS);
             tree.Fruit();
             Debug.Log("The End");
+            ui.Win();
         }
         else if(IsFailure())
         {
             PlaySFX(SFX.BREAK);
             tree.Chop();
             Debug.Log("You Lose");
+            ui.Lose();
         }
         else
         {
