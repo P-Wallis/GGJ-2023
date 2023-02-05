@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: c6d0511c94b57374da13694453f1b471
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 306, y: 141, z: 219, w: 153}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Water_Resource_Circle_1
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 146
+        width: 471
+        height: 755
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75adca1a525c7344eaa4bacc5f995dab
+      internalID: -749584115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Water_Resource_Circle_0: 1812455084
+      Water_Resource_Circle_4: -2071798146
+      Water_Resource_Circle_15: -2098860139
+      Water_Resource_Circle_29: -1370597281
+      Water_Resource_Circle_1: -749584115
+      Water_Resource_Circle_26: 2088143683
+      Water_Resource_Circle_3: -1705240457
+      Water_Resource_Circle_24: -1708659191
+      Water_Resource_Circle_9: -1805873272
+      Water_Resource_Circle_28: -915395191
+      Water_Resource_Circle_25: 2043412727
+      Water_Resource_Circle_30: -1957880206
+      Water_Resource_Circle_6: 687884846
+      Water_Resource_Circle_23: -1813462546
+      Water_Resource_Circle_7: -1454106874
+      Water_Resource_Circle_16: -1228017342
+      Water_Resource_Circle_19: 1945946746
+      Water_Resource_Circle_20: -1806819486
+      Water_Resource_Circle_17: -1181467632
+      Water_Resource_Circle_5: -568908048
+      Water_Resource_Circle_13: 384019736
+      Water_Resource_Circle_18: -589323903
+      Water_Resource_Circle_21: -567844016
+      Water_Resource_Circle_2: 1725561265
+      Water_Resource_Circle_22: -1917382361
+      Water_Resource_Circle_11: -73182162
+      Water_Resource_Circle_10: 1098552216
+      Water_Resource_Circle_8: -301577772
+      Water_Resource_Circle_12: -1598617319
+      Water_Resource_Circle_14: -1162496902
+      Water_Resource_Circle_27: -1215455277
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
