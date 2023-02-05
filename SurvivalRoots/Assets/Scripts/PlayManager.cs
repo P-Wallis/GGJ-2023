@@ -30,25 +30,32 @@ public class PlayManager : MonoBehaviour
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
 
+        ui.endTurnButton.onClick.AddListener(EndTurn);
+        ui.resetButton.onClick.AddListener(drawer.Reset);
+
         foreach(CollectableSpot spot in collectables)
         {
             spot.Init(this);
         }
     }
 
-    private void Update()
+    private void EndTurn()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (phase == GamePhase.WORLD_UPDATES)
-            {
-                phase = GamePhase.PLAYER_ACTION;
-            }
-            else
-            {
-                phase = (GamePhase)((int)phase + 1);
-            }
-        }
+        StartCoroutine(DoComputerTurn());
+    }
+
+    IEnumerator DoComputerTurn()
+    {
+        phase = GamePhase.TREE_GROWTH;
+        ui.endTurnButton.interactable = false;
+        ui.resetButton.interactable = false;
+        yield return new WaitForSeconds(5);
+        phase = GamePhase.WORLD_UPDATES;
+        yield return new WaitForSeconds(1);
+        phase = GamePhase.PLAYER_ACTION;
+        ui.endTurnButton.interactable = true;
+        ui.resetButton.interactable = true;
+
     }
 
     public void Increment(ResourceType type)
@@ -64,6 +71,36 @@ public class PlayManager : MonoBehaviour
             case ResourceType.SKULL:
                 water -= increment;
                 minerals -= increment;
+                break;
+        }
+        ui.waterMeter.SetValue(water);
+        ui.mineralMeter.SetValue(minerals);
+    }
+
+    public void SpendResources(ResourceType type = ResourceType.WATER)
+    {
+        switch (type)
+        {
+            case ResourceType.WATER:
+                water -= 1;
+                break;
+            case ResourceType.MINERAL:
+                minerals -= 1;
+                break;
+        }
+        ui.waterMeter.SetValue(water);
+        ui.mineralMeter.SetValue(minerals);
+    }
+
+    public void RefundResources(ResourceType type = ResourceType.WATER)
+    {
+        switch (type)
+        {
+            case ResourceType.WATER:
+                water += 1;
+                break;
+            case ResourceType.MINERAL:
+                minerals += 1;
                 break;
         }
         ui.waterMeter.SetValue(water);

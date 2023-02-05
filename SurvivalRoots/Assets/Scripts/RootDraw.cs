@@ -62,6 +62,20 @@ public class RootDraw : MonoBehaviour
         pendingRoots.Add(new PendingRoot(playerLine, childLevel));
     }
 
+    public void Reset()
+    {
+        isDrawing = false;
+        for (int i = 0; i < pendingRoots.Count; i++)
+        {
+            if (manager.Phase == GamePhase.PLAYER_ACTION)
+            {
+                manager.RefundResources();
+            }
+            Destroy(pendingRoots[i].line.gameObject);
+        }
+        pendingRoots.Clear();
+    }
+
     private void Update()
     {
         switch(manager.Phase)
@@ -82,16 +96,27 @@ public class RootDraw : MonoBehaviour
 
                         if (Input.GetMouseButtonDown(0))
                         {
-                            CreatePlayerLine(rootStart.point, rootStart.pointIndex < 0 ? (-rootStart.pointIndex)+1 : rootStart.parent == null ? 1 : rootStart.parent.ChildLevel+1);
-                            currentRootStart = rootStart;
-                            currentLength = 0;
-                            isDrawing = true;
+                            if (manager.water < 1)
+                            {
+                                Debug.Log("Not Enough Water");
+                            }
+                            else
+                            {
+                                manager.SpendResources();
+                                CreatePlayerLine(rootStart.point, rootStart.pointIndex < 0 ? (-rootStart.pointIndex) + 1 : rootStart.parent == null ? 1 : rootStart.parent.ChildLevel + 1);
+                                currentRootStart = rootStart;
+                                currentLength = 0;
+                                isDrawing = true;
+                                cursor.SetActive(false);
+                            }
+
                         }
                     }
                 }
 
                 if (isDrawing)
                 {
+
                     if (Input.GetMouseButton(0))
                     {
                         float delta = playerLine.positionCount > 1 ? ((Vector2)playerLine.GetPosition(playerLine.positionCount - 1) - pos).magnitude : 0;
@@ -125,7 +150,6 @@ public class RootDraw : MonoBehaviour
 
 
             case GamePhase.TREE_GROWTH:
-                isDrawing = false;
                 if(!startedGrowing)
                 {
                     for(int i=0; i<pendingRoots.Count; i++)
@@ -145,6 +169,7 @@ public class RootDraw : MonoBehaviour
                         spot.SendResources();
                     }
 
+                    Reset();
                     startedGrowing = true;
                 }
                 break;
@@ -152,11 +177,7 @@ public class RootDraw : MonoBehaviour
 
             case GamePhase.WORLD_UPDATES:
                 startedGrowing = false;
-                for (int i = 0; i < pendingRoots.Count; i++)
-                {
-                    Destroy(pendingRoots[i].line.gameObject);
-                }
-                pendingRoots.Clear();
+                
                 break;
         }
     }

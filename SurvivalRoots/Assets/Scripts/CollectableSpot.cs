@@ -15,6 +15,10 @@ public class CollectableSpot : MonoBehaviour
     public Collider2D spotCollider;
     public Transform resourcePrefab;
     public ResourceType type;
+    public float startingResources = 4;
+    float resources;
+    private SpriteRenderer sr;
+    private AnimationCurve fadeCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1, 2, -2));
 
     List<RootSpot> spots = new List<RootSpot>();
     private List<Transform> resourcePool = new List<Transform>();
@@ -23,6 +27,8 @@ public class CollectableSpot : MonoBehaviour
     public void Init(PlayManager manager)
     {
         this.manager = manager;
+        resources = startingResources;
+        sr = spotCollider.GetComponent<SpriteRenderer>();
     }
 
     public bool CollidesWith(Vector2 point)
@@ -51,6 +57,12 @@ public class CollectableSpot : MonoBehaviour
     void StartCollecting(int index)
     {
         spots[index].waitedForGrow = true;
+
+        if(resources <= 0)
+        {
+            return;
+        }
+
         if (spots[index].collecting != null)
             StopCoroutine(spots[index].collecting);
         spots[index].collecting = StartCoroutine(Collect(index));
@@ -68,8 +80,11 @@ public class CollectableSpot : MonoBehaviour
         }
         else
         {
-            resource = Instantiate(resourcePrefab, transform);
+            resource = Instantiate(resourcePrefab, manager.transform);
         }
+
+        resources -= manager.increment;
+        sr.color = new Color(1, 1, 1, fadeCurve.Evaluate(resources / startingResources));
 
         yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
 
