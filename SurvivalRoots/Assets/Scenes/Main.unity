@@ -1103,7 +1103,7 @@ MonoBehaviour:
   - {fileID: 334258226}
   - {fileID: 1042876525}
   - {fileID: 151959438}
-  rootStartWidth: 0.2
+  rootStartWidth: 0.4
   maxLength: 5
   startRadius: 0.8
   rootRadius: 0.4
@@ -1209,6 +1209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManagerPrefab: {fileID: 7551154075811556172, guid: 5b4b8eeffb75147bfa5ef5204381f19e, type: 3}
   drawer: {fileID: 1087514278}
+  tree: {fileID: 7538103697971832278}
+  maxDeathPools: 6
   waterPool: {fileID: 995231121846554821, guid: 1bb064e5fa956854489559f404e56c9b, type: 3}
   mineralChunk: {fileID: 8029355404152587383, guid: c9abc65a5b7972441840fee3ec9a51a0, type: 3}
   deathPool: {fileID: 6566148787196720178, guid: 126cf542a9a5e5d479cf99e07b2a26ff, type: 3}
@@ -1223,6 +1225,8 @@ MonoBehaviour:
   water: 2
   minerals: 2
   increment: 0.1
+  bankedWaterIncrements: 0
+  bankedMineralIncrements: 0
   waterDailyIncrease: 0.5
   startZoom: 6
   endZoom: 12
@@ -1676,3 +1680,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04be440d8619b02478fd73db3a299343, type: 3}
+--- !u!114 &7538103697971832278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2197832862356399859, guid: 04be440d8619b02478fd73db3a299343, type: 3}
+  m_PrefabInstance: {fileID: 7538103697971832277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbabfef9765f4da0a8e5efab0428219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

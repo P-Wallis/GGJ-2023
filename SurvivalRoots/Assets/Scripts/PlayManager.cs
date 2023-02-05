@@ -17,6 +17,7 @@ public class PlayManager : MonoBehaviour
     public void PlaySFX(SFX fx) { soundManager.PlaySFX(fx); }
 
     public RootDraw drawer;
+    public Tree tree;
 
     [Header("Object Generation")]
     [Range(0, 10)] public int maxDeathPools;
@@ -185,7 +186,15 @@ public class PlayManager : MonoBehaviour
         if (IsSuccess())
         {
             // End screen
+            PlaySFX(SFX.SUCCESS);
+            tree.Fruit();
             Debug.Log("The End");
+        }
+        else if(IsFailure())
+        {
+            PlaySFX(SFX.BREAK);
+            tree.Chop();
+            Debug.Log("You Lose");
         }
         else
         {
@@ -195,12 +204,12 @@ public class PlayManager : MonoBehaviour
             soundManager.TransitionMusicTo(MusicTrack.BACKGROUND);
             PlaySFX(SFX.SUNRISE);
 
-            if (water < 4)
-            {
-                water += waterDailyIncrease;
-                ui.waterMeter.SetValue(water);
-                ui.waterUpdate.Increase();
-            }
+            //if (water < 4)
+            //{
+            //    water += waterDailyIncrease;
+            //    ui.waterMeter.SetValue(water);
+            //    ui.waterUpdate.Increase();
+            //}
 
             if (drawer.maxChildIndex < 5)
             {
@@ -224,11 +233,16 @@ public class PlayManager : MonoBehaviour
     {
         for(int i=0; i<deathPools.Count; i++)
         {
-            if (deathPool.Resources > 0)
+            if (deathPools[i].Resources > 0)
                 return false;
         }
 
         return true;
+    }
+
+    public bool IsFailure()
+    {
+        return (water < 1 && drawer.PendingRootNum <= 0);
     }
 
     public void OnNotEnoughWater()

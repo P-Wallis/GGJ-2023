@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 7538103696802160514}
   - component: {fileID: 7538103696802160515}
   - component: {fileID: 6444416657201849329}
+  - component: {fileID: 2197832862356399859}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -615,3 +616,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &2197832862356399859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7538103696802160512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbabfef9765f4da0a8e5efab0428219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruit: {fileID: 1290842995, guid: 7ca8a8924f7b84d4ab2c47c48c205516, type: 3}
+  leaves:
+  - {fileID: 7647783862391766788}
+  - {fileID: 1537680424776438582}
+  - {fileID: 4325947516427246225}
+  - {fileID: 3078270059885319762}
+  - {fileID: 6586736800856849679}
+  - {fileID: 7161415789697942810}

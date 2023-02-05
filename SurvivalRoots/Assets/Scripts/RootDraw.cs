@@ -26,6 +26,7 @@ public class RootDraw : MonoBehaviour
     private bool startedGrowing = false;
     private List<RootLine> roots = new List<RootLine>();
     private List<PendingRoot> pendingRoots = new List<PendingRoot>();
+    public int PendingRootNum { get { return pendingRoots.Count; } }
     LineRenderer playerLine;
     private RootCollision currentRootStart;
 
