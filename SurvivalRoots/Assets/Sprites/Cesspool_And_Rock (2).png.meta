@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c6d0511c94b57374da13694453f1b471
+guid: b74a3256a41dc1a4aad94bece8a5f71f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 306, y: 141, z: 219, w: 153}
+  spriteBorder: {x: 313, y: 562, z: 618, w: 363}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Water_Resource_Circle_1
+      name: Cesspool_And_Rock (2)_0
       rect:
         serializedVersion: 2
-        x: 318
-        y: 146
-        width: 471
-        height: 755
+        x: 309
+        y: 563
+        width: 98
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75adca1a525c7344eaa4bacc5f995dab
-      internalID: -749584115
+      spriteID: 1b3cd71e34e4e3747bd2f7be869a5e57
+      internalID: -1180104779
       vertices: []
       indices: 
       edges: []
@@ -136,37 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Water_Resource_Circle_0: 1812455084
-      Water_Resource_Circle_4: -2071798146
-      Water_Resource_Circle_15: -2098860139
-      Water_Resource_Circle_29: -1370597281
-      Water_Resource_Circle_1: -749584115
-      Water_Resource_Circle_26: 2088143683
-      Water_Resource_Circle_3: -1705240457
-      Water_Resource_Circle_24: -1708659191
-      Water_Resource_Circle_9: -1805873272
-      Water_Resource_Circle_28: -915395191
-      Water_Resource_Circle_25: 2043412727
-      Water_Resource_Circle_30: -1957880206
-      Water_Resource_Circle_6: 687884846
-      Water_Resource_Circle_23: -1813462546
-      Water_Resource_Circle_7: -1454106874
-      Water_Resource_Circle_16: -1228017342
-      Water_Resource_Circle_19: 1945946746
-      Water_Resource_Circle_20: -1806819486
-      Water_Resource_Circle_17: -1181467632
-      Water_Resource_Circle_5: -568908048
-      Water_Resource_Circle_13: 384019736
-      Water_Resource_Circle_18: -589323903
-      Water_Resource_Circle_21: -567844016
-      Water_Resource_Circle_2: 1725561265
-      Water_Resource_Circle_22: -1917382361
-      Water_Resource_Circle_11: -73182162
-      Water_Resource_Circle_10: 1098552216
-      Water_Resource_Circle_8: -301577772
-      Water_Resource_Circle_12: -1598617319
-      Water_Resource_Circle_14: -1162496902
-      Water_Resource_Circle_27: -1215455277
+      Cesspool_And_Rock (2)_0: -1180104779
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

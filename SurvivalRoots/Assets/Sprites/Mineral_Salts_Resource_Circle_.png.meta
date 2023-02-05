@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,7 +103,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Mineral_Salts_Resource_Circle__4
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 347
+        width: 412
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ab254414acecd54ca0797766df59b3e
+      internalID: -2036563596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mineral_Salts_Resource_Circle__9
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 270
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1bf8cdeee1fbf44a1c5c46ddbddc19
+      internalID: 1633552357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mineral_Salts_Resource_Circle__10
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 263
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d98326136bb1248a12206e328d4b5e
+      internalID: -1733108787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +177,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mineral_Salts_Resource_Circle__4: -2036563596
+      Mineral_Salts_Resource_Circle__10: -1733108787
+      Mineral_Salts_Resource_Circle__7: 387188731
+      Mineral_Salts_Resource_Circle__0: 1748082453
+      Mineral_Salts_Resource_Circle__8: 1826398800
+      Mineral_Salts_Resource_Circle__5: -641644037
+      Mineral_Salts_Resource_Circle__9: 1633552357
+      Mineral_Salts_Resource_Circle__1: 400585491
+      Mineral_Salts_Resource_Circle__6: -1631284943
+      Mineral_Salts_Resource_Circle__2: 1618215799
+      Mineral_Salts_Resource_Circle__3: -1484607590
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
