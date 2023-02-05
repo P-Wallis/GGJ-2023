@@ -32,6 +32,7 @@ public class PlayManager : MonoBehaviour
 
         ui.dayVisualizer.SetTime(TimeOfDay.DAWN);
         drawer.maxChildIndex = 0;
+        ui.powerLevel.text = (drawer.maxChildIndex + 1).ToString();
 
         ui.endTurnButton.onClick.AddListener(EndTurn);
         ui.resetButton.onClick.AddListener(drawer.Reset);
@@ -64,6 +65,7 @@ public class PlayManager : MonoBehaviour
             {
                 SpendResources(ResourceType.MINERAL);
                 drawer.maxChildIndex++;
+                ui.powerLevel.text = (drawer.maxChildIndex + 1).ToString();
             }
 
             if (water < 4 && minerals >= 1)
