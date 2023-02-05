@@ -38,6 +38,8 @@ public class UIManager : MonoBehaviour
     public GameObject end;
     public TextMeshProUGUI endTitle;
     public TextMeshProUGUI endDescription;
+    public GameObject imageWin;
+    public GameObject imageLose;
     public Button muteButton;
     public GameObject muted, unmuted;
 
@@ -67,6 +69,9 @@ public class UIManager : MonoBehaviour
     {
         end.SetActive(true);
         endTitle.text = "You Win!";
+
+        imageWin.SetActive(true);
+        imageLose.SetActive(false);
     }
 
     public void Lose()
@@ -74,6 +79,9 @@ public class UIManager : MonoBehaviour
         end.SetActive(true);
         endTitle.text = "You Lose.";
         endDescription.gameObject.SetActive(false);
+
+        imageWin.SetActive(false);
+        imageLose.SetActive(true);
     }
 
     public void Restart()
