@@ -696,6 +696,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &561968642 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6566148787196720178, guid: 126cf542a9a5e5d479cf99e07b2a26ff, type: 3}
+  m_PrefabInstance: {fileID: 409935496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8214eb8e7194685984be9711822281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &693026776
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +791,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &705083455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8029355404152587383, guid: c9abc65a5b7972441840fee3ec9a51a0, type: 3}
+  m_PrefabInstance: {fileID: 1445390054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8214eb8e7194685984be9711822281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &789789889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,6 +1381,8 @@ MonoBehaviour:
   drawer: {fileID: 1087514278}
   collectables:
   - {fileID: 811635218}
+  - {fileID: 561968642}
+  - {fileID: 705083455}
   water: 0
   minerals: 0
   increment: 0.01
