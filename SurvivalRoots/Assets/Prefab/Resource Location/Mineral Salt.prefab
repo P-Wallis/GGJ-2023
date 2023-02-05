@@ -102,6 +102,7 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   spots: []
   resourcePrefab: {fileID: 5605034054118949568, guid: dfd487fa508daf643b5608e48134fa3b, type: 3}
+  type: 2
 --- !u!60 &1477526986778133915
 PolygonCollider2D:
   m_ObjectHideFlags: 0
