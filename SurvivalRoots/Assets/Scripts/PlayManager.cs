@@ -39,8 +39,23 @@ public class PlayManager : MonoBehaviour
     [Range(0,0.1f)]public float increment;
     [Range(0, 4f)] public float waterDailyIncrease = 0.5f;
 
+
+    [Header("Camera")]
+    [Range(0, 15)] public float startZoom = 8;
+    [Range(0, 15)] public float endZoom = 12;
+    [Range(0, 2)] public float zoomIncrement = 1;
+    [Range(0, 10)] public float zoomTime = 1;
+    public AnimationCurve zoomCurve;
+    private Camera mainCam;
+    private float currentZoom;
+    private Coroutine zoomAnimation;
+
     void Start()
     {
+        mainCam = Camera.main;
+        mainCam.orthographicSize = startZoom;
+        currentZoom = startZoom;
+
         ui = UIManager.instance;
         soundManager = Instantiate(soundManagerPrefab);
         drawer.Init(this, collectables);
@@ -84,7 +99,7 @@ public class PlayManager : MonoBehaviour
                 {
                     if(good)
                     {
-                        collectables.Add(Instantiate(waterPool, pos, Quaternion.identity, transform));
+                        collectables.Add(Instantiate(waterPool, pos, randAngle, transform));
                         collectables[collectables.Count - 1].startingResources = i;
                     }
                     else
@@ -133,6 +148,7 @@ public class PlayManager : MonoBehaviour
         phase = GamePhase.WORLD_UPDATES;
         {
             ui.dayVisualizer.AdvanceTimeOfDay();
+            UpdateZoom();
             yield return new WaitForSeconds(5);
         }
 
@@ -221,5 +237,29 @@ public class PlayManager : MonoBehaviour
         }
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
+    }
+
+    private void UpdateZoom()
+    {
+        if(zoomAnimation != null)
+        {
+            StopCoroutine(zoomAnimation);
+        }
+        zoomAnimation = StartCoroutine(CoZoom());
+    }
+
+    IEnumerator CoZoom()
+    {
+        float percent = 0, dt = 1 / zoomTime;
+        float start = currentZoom;
+        float end = Mathf.Clamp(currentZoom + zoomIncrement, startZoom, endZoom);
+        currentZoom = end;
+        while (percent < 1)
+        {
+            mainCam.orthographicSize = Mathf.Lerp(start, end, zoomCurve.Evaluate(percent));
+
+            percent += Time.deltaTime * dt;
+            yield return null;
+        }
     }
 }
