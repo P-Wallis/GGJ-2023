@@ -12,6 +12,9 @@ public enum GamePhase
 public class PlayManager : MonoBehaviour
 {
     UIManager ui;
+    public SoundManager soundManagerPrefab;
+    private SoundManager soundManager;
+
     public RootDraw drawer;
     public CollectableSpot waterPool, mineralChunk, deathPool;
     public GameObject rock;
@@ -33,6 +36,7 @@ public class PlayManager : MonoBehaviour
     void Start()
     {
         ui = UIManager.instance;
+        soundManager = Instantiate(soundManagerPrefab);
         drawer.Init(this, collectables);
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
