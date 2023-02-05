@@ -7,16 +7,16 @@ public enum ResourceType
     NONE,
     WATER,
     MINERAL,
-    SWAMP
+    SKULL
 }
 
 public class CollectableSpot : MonoBehaviour
 {
     public Collider2D spotCollider;
-    public Color color;
-    public List<RootSpot> spots = new List<RootSpot>();
     public Transform resourcePrefab;
     public ResourceType type;
+
+    List<RootSpot> spots = new List<RootSpot>();
 
     public bool CollidesWith(Vector2 point)
     {

@@ -19,8 +19,9 @@ public class RootLine : MonoBehaviour
     private bool grown = false;
     public bool Grown { get { return grown; } }
     public event Action onGrowingComplete;
+    private float widthMultiplier;
 
-    public void Init(RootLine parent, Vector3[] playerPoints, List<CollectableSpot> collectables, float maxLength, float resamplingSize, float resamplingNoise)
+    public void Init(RootLine parent, Vector3[] playerPoints, List<CollectableSpot> collectables, float maxLength, float resamplingSize, float resamplingNoise, float width)
     {
         this.parent = parent;
         this.maxLength = maxLength;
@@ -30,18 +31,35 @@ public class RootLine : MonoBehaviour
         List<Vector3> listPoints = new List<Vector3>();
         listPoints.AddRange(playerPoints);
         points = GetRootPoints(listPoints);
-        CalculateBounds();
+        bounds = CalculateBounds(points);
         CalculatePathToTree();
         FindSpots(collectables);
 
-        if(parent != null)
+        if (parent != null)
         {
-            rootLine.widthMultiplier = parent.rootLine.widthMultiplier / 2f;
             childLevel = parent.ChildLevel + 1;
+            widthMultiplier = width / (2f * childLevel);
         }
+        else
+        {
+            widthMultiplier = width;
+        }
+        rootLine.widthMultiplier = 0;
 
         grown = false;
 
+        if (parent == null || parent.grown)
+        {
+            PlayRootDrawAnimation();
+        }
+        else
+        {
+            parent.onGrowingComplete += PlayRootDrawAnimation;
+        }
+    }
+
+    private void PlayRootDrawAnimation()
+    {
         if (rootDrawAnimation != null)
             StopCoroutine(rootDrawAnimation);
         rootDrawAnimation = StartCoroutine(DrawRoot());
@@ -100,13 +118,14 @@ public class RootLine : MonoBehaviour
         }
     }
 
-    void CalculateBounds()
+    public static Bounds CalculateBounds(Vector3[] points)
     {
-        bounds = new Bounds(points[0], new Vector3(0.001f, 0.001f, 1f));
+        Bounds bounds = new Bounds(points[0], new Vector3(0.001f, 0.001f, 1f));
         foreach(Vector3 point in points)
         {
             bounds.Encapsulate(point);
-        }    
+        }
+        return bounds;
     }
 
     void CalculatePathToTree()
@@ -144,8 +163,8 @@ public class RootLine : MonoBehaviour
         }
 
         // Resample points
-        float step = resamplingSize * maxLength;
-        List<Vector3> resampled = ResamplePoints(points, step);
+        //float step = resamplingSize * maxLength;
+        List<Vector3> resampled = points;// ResamplePoints(points, step);
 
         // Add a touch of noise
         float noise = resamplingNoise * maxLength;
@@ -160,7 +179,7 @@ public class RootLine : MonoBehaviour
         return smoothed.ToArray();
     }
 
-    private static List<Vector3> ResamplePoints(List<Vector3> points, float step)
+    public static List<Vector3> ResamplePoints(List<Vector3> points, float step)
     {
         List<Vector3> resampled = new List<Vector3>();
         float remainingDistance = 0;
@@ -185,7 +204,7 @@ public class RootLine : MonoBehaviour
         return resampled;
     }
 
-    private static List<Vector3> SmoothPoints(List<Vector3> points)
+    public static List<Vector3> SmoothPoints(List<Vector3> points)
     {
         List<Vector3> smoothed = new List<Vector3>();
         smoothed.Add(points[0]);
@@ -221,6 +240,7 @@ public class RootLine : MonoBehaviour
         {
             AnimationCurve curve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(percent * 0.75f, 1), new Keyframe(percent, 0, -10, .5f));
             rootLine.widthCurve = curve;
+            rootLine.widthMultiplier = Mathf.Lerp(0, widthMultiplier, percent);
             percent += Time.deltaTime;
             yield return null;
         }
