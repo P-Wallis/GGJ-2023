@@ -1213,7 +1213,8 @@ MonoBehaviour:
   mineralChunk: {fileID: 8029355404152587383, guid: c9abc65a5b7972441840fee3ec9a51a0, type: 3}
   deathPool: {fileID: 6566148787196720178, guid: 126cf542a9a5e5d479cf99e07b2a26ff, type: 3}
   rock: {fileID: 4763826691599342788, guid: e267bf3a76e737e4292d6264ac791a0a, type: 3}
-  plants: []
+  plants:
+  - {fileID: 802536707403226634, guid: d4fb3f53f22d84bbe9e10e808d092e4c, type: 3}
   radiusIncrement: 4
   objectDensity: 3.5
   posjitter: 0.753

@@ -14,6 +14,7 @@ public class PlayManager : MonoBehaviour
     UIManager ui;
     public SoundManager soundManagerPrefab;
     private SoundManager soundManager;
+    public void PlaySFX(SFX fx) { soundManager.PlaySFX(fx); }
 
     public RootDraw drawer;
     public CollectableSpot waterPool, mineralChunk, deathPool;
@@ -98,6 +99,7 @@ public class PlayManager : MonoBehaviour
 
     private void EndTurn()
     {
+        PlaySFX(SFX.SUCCESS);
         StartCoroutine(DoComputerTurn());
     }
 
