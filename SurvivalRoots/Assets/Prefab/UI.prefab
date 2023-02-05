@@ -485,6 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429954854727598909}
   - component: {fileID: 3673855648357944510}
+  - component: {fileID: 4941798591383208014}
   - component: {fileID: 1429954854727598910}
   - component: {fileID: 1429954854727598911}
   - component: {fileID: 1429954854727598880}
@@ -541,6 +542,25 @@ MonoBehaviour:
   mineralMeter: {fileID: 487699105580973373}
   endTurnButton: {fileID: 6653099358298010968}
   resetButton: {fileID: 3407511684570366107}
+  dayVisualizer: {fileID: 4941798591383208014}
+--- !u!114 &4941798591383208014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429954854727598881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e09ea762e12c428dac02e5bcb4d8e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  dawn: {fileID: 1676237980, guid: 50ad04522d1c63e44a6709dc5bb5b1ab, type: 3}
+  noon: {fileID: 1391172708, guid: 50ad04522d1c63e44a6709dc5bb5b1ab, type: 3}
+  dusk: {fileID: 1302363509, guid: 50ad04522d1c63e44a6709dc5bb5b1ab, type: 3}
+  sunDial: {fileID: 1429954854762835028}
+  dayText: {fileID: 1429954854939843498}
 --- !u!223 &1429954854727598910
 Canvas:
   m_ObjectHideFlags: 0

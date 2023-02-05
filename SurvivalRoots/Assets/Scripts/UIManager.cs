@@ -22,4 +22,5 @@ public class UIManager : MonoBehaviour
     public ResourcesMeter mineralMeter;
     public Button endTurnButton;
     public Button resetButton;
+    public DayVisualizer dayVisualizer;
 }

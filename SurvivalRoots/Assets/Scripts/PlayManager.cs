@@ -30,6 +30,8 @@ public class PlayManager : MonoBehaviour
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
 
+        ui.dayVisualizer.SetTime(TimeOfDay.DAWN);
+
         ui.endTurnButton.onClick.AddListener(EndTurn);
         ui.resetButton.onClick.AddListener(drawer.Reset);
 
@@ -53,6 +55,7 @@ public class PlayManager : MonoBehaviour
         phase = GamePhase.WORLD_UPDATES;
         yield return new WaitForSeconds(1);
         phase = GamePhase.PLAYER_ACTION;
+        ui.dayVisualizer.AdvanceTimeOfDay();
         ui.endTurnButton.interactable = true;
         ui.resetButton.interactable = true;
 
