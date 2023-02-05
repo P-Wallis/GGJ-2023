@@ -9,7 +9,9 @@ public class RootDraw : MonoBehaviour
     private Camera mainCamera;
     public GameObject cursor;
     public Transform[] startNodes;
+    public List<CollectableSpot> collectables;
 
+    [Range(0, 1)] public float rootStartWidth = 0.2f;
     [Range(0,10)]public float maxLength = 5;
     [Range(0, 5)] public float startRadius = 1;
     [Range(0, 5)] public float rootRadius = 1;
@@ -25,6 +27,8 @@ public class RootDraw : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        playerLine.widthMultiplier = 1.5f * rootStartWidth;
+        rootLinePrefab.rootLine.widthMultiplier = rootStartWidth;
         cursor.transform.localScale = Vector3.one * (startRadius * 2);
     }
 
@@ -71,7 +75,7 @@ public class RootDraw : MonoBehaviour
                 playerLine.GetPositions(positions);
 
                 RootLine root = Instantiate(rootLinePrefab, transform);
-                root.Init(currentRootStart.parent, positions, maxLength, resamplingSize, resamplingNoise);
+                root.Init(currentRootStart.parent, positions, collectables, maxLength, resamplingSize, resamplingNoise);
                 roots.Add(root);
 
                 isDrawing = false;
