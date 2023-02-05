@@ -12,6 +12,10 @@ public enum GamePhase
 public class PlayManager : MonoBehaviour
 {
     UIManager ui;
+    public SoundManager soundManagerPrefab;
+    private SoundManager soundManager;
+    public void PlaySFX(SFX fx) { soundManager.PlaySFX(fx); }
+
     public RootDraw drawer;
     public CollectableSpot waterPool, mineralChunk, deathPool;
     public GameObject rock;
@@ -33,6 +37,7 @@ public class PlayManager : MonoBehaviour
     void Start()
     {
         ui = UIManager.instance;
+        soundManager = Instantiate(soundManagerPrefab);
         drawer.Init(this, collectables);
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
@@ -94,22 +99,36 @@ public class PlayManager : MonoBehaviour
 
     private void EndTurn()
     {
+        PlaySFX(SFX.SUCCESS);
         StartCoroutine(DoComputerTurn());
     }
 
     IEnumerator DoComputerTurn()
     {
+        // Growth
         phase = GamePhase.TREE_GROWTH;
-        ui.endTurnButton.interactable = false;
-        ui.resetButton.interactable = false;
-        yield return new WaitForSeconds(5);
-        phase = GamePhase.WORLD_UPDATES;
-        yield return new WaitForSeconds(1);
-        phase = GamePhase.PLAYER_ACTION;
-
-        bool dayRollover = ui.dayVisualizer.AdvanceTimeOfDay();
-        if(dayRollover)
         {
+            ui.dayVisualizer.AdvanceTimeOfDay();
+            soundManager.TransitionMusicTo(MusicTrack.GROWING);
+
+            ui.endTurnButton.interactable = false;
+            ui.resetButton.interactable = false;
+            yield return new WaitForSeconds(5);
+        }
+
+        // World
+        phase = GamePhase.WORLD_UPDATES;
+        {
+            ui.dayVisualizer.AdvanceTimeOfDay();
+            yield return new WaitForSeconds(5);
+        }
+
+        // Player
+        phase = GamePhase.PLAYER_ACTION;
+        {
+            ui.dayVisualizer.AdvanceTimeOfDay();
+            soundManager.TransitionMusicTo(MusicTrack.BACKGROUND);
+
             if (drawer.maxChildIndex < 5 && minerals >= 1)
             {
                 SpendResources(ResourceType.MINERAL);
@@ -122,10 +141,10 @@ public class PlayManager : MonoBehaviour
                 SpendResources(ResourceType.MINERAL);
                 RefundResources(ResourceType.WATER);
             }
-        }
 
-        ui.endTurnButton.interactable = true;
-        ui.resetButton.interactable = true;
+            ui.endTurnButton.interactable = true;
+            ui.resetButton.interactable = true;
+        }
 
     }
 

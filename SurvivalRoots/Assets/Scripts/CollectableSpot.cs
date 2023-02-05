@@ -56,6 +56,7 @@ public class CollectableSpot : MonoBehaviour
 
     void StartCollecting(int index)
     {
+        manager.PlaySFX(SFX.GATHERING);
         spots[index].waitedForGrow = true;
 
         if(resources <= 0)

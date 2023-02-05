@@ -152,6 +152,11 @@ public class RootDraw : MonoBehaviour
             case GamePhase.TREE_GROWTH:
                 if(!startedGrowing)
                 {
+                    if(pendingRoots.Count>0)
+                    {
+                        manager.PlaySFX(SFX.GROWING);
+                    }
+
                     for(int i=0; i<pendingRoots.Count; i++)
                     {
                         Vector3[] positions = new Vector3[pendingRoots[i].line.positionCount];
