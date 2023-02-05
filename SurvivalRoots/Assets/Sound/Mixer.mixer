@@ -145,6 +145,8 @@ AudioMixerController:
     name: MusicDangerVolume
   - guid: 2e733183b21344f41b053811fd234e6b
     name: MusicGrowingVolume
+  - guid: 1e153272fea064989b942f79811b3860
+    name: MasterVolume
   - guid: 8f95e0d24899a474e9b9d8a748315229
     name: SFX
   m_AudioMixerGroupViews:

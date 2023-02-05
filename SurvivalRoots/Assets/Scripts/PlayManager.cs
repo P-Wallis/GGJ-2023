@@ -77,6 +77,8 @@ public class PlayManager : MonoBehaviour
         ui.endTurnButton.onClick.AddListener(EndTurn);
         ui.resetButton.onClick.AddListener(drawer.Reset);
 
+        ui.muteButton.onClick.AddListener(soundManager.ToggleMute);
+
         DistributeStuff();
 
         foreach (CollectableSpot spot in collectables)

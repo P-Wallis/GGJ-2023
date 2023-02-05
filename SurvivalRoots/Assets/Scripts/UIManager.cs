@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
         instructions.SetActive(instructionsShown);
         start.SetActive(true);
         end.SetActive(false);
+
+        muteButton.onClick.AddListener(ToggleMute);
     }
 
     [HideInInspector] public bool instructionsShown = true;
@@ -36,6 +38,16 @@ public class UIManager : MonoBehaviour
     public GameObject end;
     public TextMeshProUGUI endTitle;
     public TextMeshProUGUI endDescription;
+    public Button muteButton;
+    public GameObject muted, unmuted;
+
+    bool isMuted = false;
+    void ToggleMute()
+    {
+        isMuted = !isMuted;
+        muted.SetActive(isMuted);
+        unmuted.SetActive(!isMuted);
+    }
 
     private void Update()
     {

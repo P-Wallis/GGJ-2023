@@ -69,6 +69,7 @@ public class SoundManager : MonoBehaviour
     private Dictionary<SFX, AudioSource> sfxDict = new Dictionary<SFX, AudioSource>();
     private MusicTrack track = MusicTrack.BACKGROUND;
     private MusicTrack oldTrack = MusicTrack.BACKGROUND;
+    private bool muted = false;
 
 
     private void Start()
@@ -116,6 +117,19 @@ public class SoundManager : MonoBehaviour
         }
         musicTransitionAnimation = StartCoroutine(CoTransitionMusic(track, newMusic));
 
+    }
+
+    public void ToggleMute()
+    {
+        muted = !muted;
+        if(muted)
+        {
+            mixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            mixer.SetFloat("MasterVolume", 0);
+        }
     }
 
     string GetMusicParameter(MusicTrack musicTrack)
