@@ -27,6 +27,7 @@ public class PlayManager : MonoBehaviour
     [Range(0, 1)] public float posjitter = 1;
     public int rings = 5;
     private List<CollectableSpot> collectables = new List<CollectableSpot>();
+    private List<Collider2D> obstacles = new List<Collider2D>();
 
     private GamePhase phase;
     public GamePhase Phase { get { return phase; } }
@@ -58,7 +59,7 @@ public class PlayManager : MonoBehaviour
 
         ui = UIManager.instance;
         soundManager = Instantiate(soundManagerPrefab);
-        drawer.Init(this, collectables);
+        drawer.Init(this, collectables, obstacles);
         ui.waterMeter.SetValue(water);
         ui.mineralMeter.SetValue(minerals);
 
@@ -104,13 +105,19 @@ public class PlayManager : MonoBehaviour
                     }
                     else
                     {
-                        if (Random.value < 0.7f)
+                        if (Random.value < 0.3f)
                         {
                             Instantiate(plants[Random.Range(0,plants.Length)], pos, randAngle, transform);
                         }
                         else
                         {
-                            Instantiate(rock, pos, randAngle, transform);
+                            GameObject rockGO = Instantiate(rock, pos, randAngle, transform);
+                            Collider2D rockCollider = rockGO.GetComponent<PolygonCollider2D>();
+
+                            if(rockCollider != null)
+                            {
+                                obstacles.Add(rockCollider);
+                            }
                         }
                     }
                 }

@@ -12,6 +12,7 @@ public class RootDraw : MonoBehaviour
 
     private PlayManager manager;
     private List<CollectableSpot> collectables;
+    private List<Collider2D> obstacles;
 
     [Range(0, 1)] public float rootStartWidth = 0.2f;
     [Range(0,10)]public float maxLength = 5;
@@ -42,10 +43,11 @@ public class RootDraw : MonoBehaviour
     }
 
 
-    public void Init(PlayManager manager, List<CollectableSpot> collectables)
+    public void Init(PlayManager manager, List<CollectableSpot> collectables, List<Collider2D> obstacles)
     {
         this.manager = manager;
         this.collectables = collectables;
+        this.obstacles = obstacles;
 
         mainCamera = Camera.main;
         rootLinePrefab.rootLine.widthMultiplier = rootStartWidth;
@@ -83,6 +85,7 @@ public class RootDraw : MonoBehaviour
             case GamePhase.PLAYER_ACTION:
 
                 Vector2 pos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
                 if (!isDrawing)
                 {
                     RootCollision rootStart = GetRootStartPoint(pos, true);
@@ -122,6 +125,18 @@ public class RootDraw : MonoBehaviour
 
                 if (isDrawing)
                 {
+                    // Collisions
+                    for (int i = 0; i < obstacles.Count; i++)
+                    {
+                        if (obstacles[i].OverlapPoint(pos))
+                        {
+                            float angle = Mathf.Atan2(pos.y - obstacles[i].transform.position.y, pos.x - obstacles[i].transform.position.x);
+                            Vector2 newPos = obstacles[i].transform.position;
+                            newPos += new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 2;
+                            Debug.Log("Overlapped! Point: " + pos + ", closest: " + obstacles[i].ClosestPoint(newPos));
+                            pos = obstacles[i].ClosestPoint(newPos);
+                        }
+                    }
 
                     if (Input.GetMouseButton(0))
                     {
