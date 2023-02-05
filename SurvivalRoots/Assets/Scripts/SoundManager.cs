@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public enum SFX
 {
     GATHERING,
+    GROWING,
     BREAK,
     SUCCESS
 }
@@ -16,6 +17,7 @@ public class SoundManager : MonoBehaviour
     public class Effects
     {
         public AudioClip gathering;
+        public AudioClip growing;
         public AudioClip breaking;
         public AudioClip success;
         public AudioMixerGroup effectsMixer;
@@ -49,6 +51,8 @@ public class SoundManager : MonoBehaviour
     public Ambience ambience;
     public AudioMixer mixer;
 
+    private Dictionary<SFX, AudioSource> sfxDict = new Dictionary<SFX, AudioSource>();
+
     private void Start()
     {
         // Music
@@ -59,9 +63,23 @@ public class SoundManager : MonoBehaviour
         // Ambience
         MakeSound(ambience.nature, ambience.ambienceMixer, ambience.ambienceMixerVolumeParameter, 0, true, true);
 
+        // SFX
+        sfxDict.Add(SFX.GATHERING, MakeSound(soundEffects.gathering, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.GROWING, MakeSound(soundEffects.growing, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.BREAK, MakeSound(soundEffects.breaking, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.SUCCESS, MakeSound(soundEffects.success, soundEffects.effectsMixer));
+
     }
 
-    void MakeSound(AudioClip clip, AudioMixerGroup mixerGroup, string volumeParameter, float mixerVolume = 0, bool play = false, bool loop = false)
+    public void PlaySFX(SFX fx)
+    {
+        if (sfxDict.ContainsKey(fx))
+        {
+            sfxDict[fx].Play();
+        }
+    }
+
+    AudioSource MakeSound(AudioClip clip, AudioMixerGroup mixerGroup, string volumeParameter = null, float mixerVolume = 0, bool play = false, bool loop = false)
     {
         GameObject obj = new GameObject();
         obj.transform.parent = transform;
@@ -80,5 +98,7 @@ public class SoundManager : MonoBehaviour
         {
             source.Play();
         }
+
+        return source;
     }
 }
