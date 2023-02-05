@@ -17,6 +17,13 @@ public class CollectableSpot : MonoBehaviour
     public ResourceType type;
 
     List<RootSpot> spots = new List<RootSpot>();
+    private List<Transform> resourcePool = new List<Transform>();
+    PlayManager manager;
+
+    public void Init(PlayManager manager)
+    {
+        this.manager = manager;
+    }
 
     public bool CollidesWith(Vector2 point)
     {
@@ -30,8 +37,20 @@ public class CollectableSpot : MonoBehaviour
         root.onGrowingComplete += () => { StartCollecting(newSpot); };
     }
 
+    public void SendResources()
+    {
+        for(int i=0; i<spots.Count; i++)
+        {
+            if(spots[i].waitedForGrow)
+            {
+                StartCollecting(i);
+            }
+        }
+    }
+
     void StartCollecting(int index)
     {
+        spots[index].waitedForGrow = true;
         if (spots[index].collecting != null)
             StopCoroutine(spots[index].collecting);
         spots[index].collecting = StartCoroutine(Collect(index));
@@ -40,21 +59,24 @@ public class CollectableSpot : MonoBehaviour
     IEnumerator Collect(int index)
     {
         yield return new WaitForSeconds(Random.Range(0, 1f));
-        Transform resource = Instantiate(resourcePrefab, transform);
-
-        while(true)
+        Transform resource;
+        if (resourcePool.Count > 0)
         {
-            yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
-
-            if(type == ResourceType.WATER)
-            {
-                UIManager.instance.waterMeter.IncrementValue(0.05f);
-            }
-            else if(type == ResourceType.MINERAL)
-            {
-                UIManager.instance.mineralMeter.IncrementValue(0.05f);
-            }
+            resource = resourcePool[resourcePool.Count - 1];
+            resourcePool.RemoveAt(resourcePool.Count - 1);
+            resource.gameObject.SetActive(true);
         }
+        else
+        {
+            resource = Instantiate(resourcePrefab, transform);
+        }
+
+        yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
+
+        manager.Increment(type);
+
+        resource.gameObject.SetActive(false);
+        resourcePool.Add(resource);
     }
 
     [System.Serializable]
@@ -64,12 +86,14 @@ public class CollectableSpot : MonoBehaviour
         public int spotIndex;
         public RootLine root;
         public Coroutine collecting;
+        public bool waitedForGrow;
 
         public RootSpot(Vector2 spot, int spotIndex, RootLine root)
         {
             this.spot = spot;
             this.spotIndex = spotIndex;
             this.root = root;
+            waitedForGrow = false;
         }
     }
 }

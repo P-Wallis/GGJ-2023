@@ -1124,7 +1124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawer: {fileID: 1087514278}
-  collectables: []
+  collectables:
+  - {fileID: 1996648408}
+  water: 0
+  minerals: 0
+  increment: 0.01
 --- !u!4 &1338789742
 Transform:
   m_ObjectHideFlags: 0

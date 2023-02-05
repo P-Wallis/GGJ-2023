@@ -38,7 +38,6 @@ public class RootDraw : MonoBehaviour
         {
             this.line = line;
             this.childLevel = childLevel;
-            Debug.Log(childLevel);
         }
     }
 
@@ -139,6 +138,11 @@ public class RootDraw : MonoBehaviour
                         RootLine root = Instantiate(rootLinePrefab, transform);
                         root.Init(currentRootStart.parent, positions, collectables, maxLength, resamplingSize, resamplingNoise, rootStartWidth);
                         roots.Add(root);
+                    }
+
+                    foreach (CollectableSpot spot in collectables)
+                    {
+                        spot.SendResources();
                     }
 
                     startedGrowing = true;
