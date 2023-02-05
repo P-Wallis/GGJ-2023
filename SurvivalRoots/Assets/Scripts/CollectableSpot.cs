@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceType
+{
+    NONE,
+    WATER,
+    MINERAL,
+    SWAMP
+}
+
 public class CollectableSpot : MonoBehaviour
 {
     public Collider2D spotCollider;
     public Color color;
     public List<RootSpot> spots = new List<RootSpot>();
     public Transform resourcePrefab;
+    public ResourceType type;
 
     public bool CollidesWith(Vector2 point)
     {
@@ -36,6 +45,15 @@ public class CollectableSpot : MonoBehaviour
         while(true)
         {
             yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
+
+            if(type == ResourceType.WATER)
+            {
+                UIManager.instance.waterMeter.IncrementValue(0.1f);
+            }
+            else if(type == ResourceType.MINERAL)
+            {
+                UIManager.instance.mineralMeter.IncrementValue(0.1f);
+            }
         }
     }
 
