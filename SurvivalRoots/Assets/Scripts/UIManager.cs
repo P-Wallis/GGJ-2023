@@ -15,9 +15,10 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
 
-        waterMeter.SetValue(0);
-        mineralMeter.SetValue(0);
+        instructions.SetActive(instructionsShown);
     }
+
+    bool instructionsShown = true;
 
     public ResourcesMeter waterMeter;
     public ResourcesMeter mineralMeter;
@@ -28,4 +29,14 @@ public class UIManager : MonoBehaviour
     public UIRiseAndFade waterUpdate;
     public UIRiseAndFade mineralUpdate;
     public UIRiseAndFade noWaterAlert;
+    public GameObject instructions;
+
+    private void Update()
+    {
+        if(instructionsShown && Input.GetMouseButtonDown(0))
+        {
+            instructionsShown = false;
+            instructions.SetActive(instructionsShown);
+        }
+    }
 }

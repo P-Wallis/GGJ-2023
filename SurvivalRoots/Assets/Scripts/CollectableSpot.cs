@@ -17,6 +17,7 @@ public class CollectableSpot : MonoBehaviour
     public ResourceType type;
     public float startingResources = 4;
     float resources;
+    public float Resources { get { return resources; } }
     private SpriteRenderer sr;
     private AnimationCurve fadeCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1, 2, -2));
 
@@ -54,15 +55,52 @@ public class CollectableSpot : MonoBehaviour
         }
     }
 
+    bool MeterFull()
+    {
+        switch(type)
+        {
+            case ResourceType.WATER:
+                return manager.water + manager.bankedWaterIncrements >= 4;
+
+            case ResourceType.MINERAL:
+                return manager.minerals + manager.bankedMineralIncrements >= 4;
+
+            case ResourceType.SKULL:
+                return manager.minerals + manager.bankedMineralIncrements <= 0;
+        }
+
+        return false;
+    }
+
+    void BankIncrement()
+    {
+        switch (type)
+        {
+            case ResourceType.WATER:
+                manager.bankedWaterIncrements += manager.increment;
+                break;
+
+            case ResourceType.MINERAL:
+                manager.bankedMineralIncrements += manager.increment;
+                break;
+
+            case ResourceType.SKULL:
+                manager.bankedMineralIncrements -= manager.increment;
+                break;
+        }
+    }
+
     void StartCollecting(int index)
     {
         manager.PlaySFX(SFX.GATHERING);
         spots[index].waitedForGrow = true;
 
-        if(resources <= 0)
+        if(resources <= 0 || MeterFull())
         {
             return;
         }
+
+        BankIncrement();
 
         if (spots[index].collecting != null)
             StopCoroutine(spots[index].collecting);

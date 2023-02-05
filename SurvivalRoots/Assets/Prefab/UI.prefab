@@ -1487,6 +1487,7 @@ MonoBehaviour:
   waterUpdate: {fileID: 2840669389653525003}
   mineralUpdate: {fileID: 3954809309163806797}
   noWaterAlert: {fileID: 4517205788815551082}
+  instructions: {fileID: 3997885057493827119}
 --- !u!114 &4941798591383208014
 MonoBehaviour:
   m_ObjectHideFlags: 0
