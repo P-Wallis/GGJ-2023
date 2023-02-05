@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RootLine : MonoBehaviour
 {
-    public Transform testDot;
     public LineRenderer rootLine;
     float resamplingSize = 0.001f;
     float resamplingNoise = 0.01f;
@@ -15,8 +16,11 @@ public class RootLine : MonoBehaviour
     protected RootLine parent;
     private int childLevel = 0;
     public int ChildLevel { get { return childLevel; } }
+    private bool grown = false;
+    public bool Grown { get { return grown; } }
+    public event Action onGrowingComplete;
 
-    public void Init(RootLine parent, Vector3[] playerPoints, float maxLength, float resamplingSize, float resamplingNoise)
+    public void Init(RootLine parent, Vector3[] playerPoints, List<CollectableSpot> collectables, float maxLength, float resamplingSize, float resamplingNoise)
     {
         this.parent = parent;
         this.maxLength = maxLength;
@@ -28,12 +32,15 @@ public class RootLine : MonoBehaviour
         points = GetRootPoints(listPoints);
         CalculateBounds();
         CalculatePathToTree();
+        FindSpots(collectables);
 
         if(parent != null)
         {
             rootLine.widthMultiplier = parent.rootLine.widthMultiplier / 2f;
             childLevel = parent.ChildLevel + 1;
         }
+
+        grown = false;
 
         if (rootDrawAnimation != null)
             StopCoroutine(rootDrawAnimation);
@@ -77,6 +84,20 @@ public class RootLine : MonoBehaviour
         };
 
         return collision;
+    }
+
+    void FindSpots(List<CollectableSpot> collectables)
+    {
+        for(int c=0; c<collectables.Count; c++)
+        {
+            for(int p=0; p<points.Length; p++)
+            {
+                if(collectables[c].CollidesWith(points[p]))
+                {
+                    collectables[c].SetRootSpot(points[p], p, this);
+                }
+            }
+        }
     }
 
     void CalculateBounds()
@@ -190,6 +211,7 @@ public class RootLine : MonoBehaviour
     Coroutine rootDrawAnimation;
     IEnumerator DrawRoot()
     {
+        grown = false;
         rootLine.positionCount = points.Length;
         rootLine.SetPositions(points);
 
@@ -202,28 +224,27 @@ public class RootLine : MonoBehaviour
             percent += Time.deltaTime;
             yield return null;
         }
+        grown = true;
+        if (onGrowingComplete != null)
+            onGrowingComplete();
 
-        yield return StartCoroutine(AnimateOnPathToTree());
     }
 
-    IEnumerator AnimateOnPathToTree()
+    public IEnumerator AnimateOnPathToTree(Transform tf, int startPointIndex, float speed = 20f)
     {
-        float dt = 20f / pathToTree.Count;
-        while (true)
+        float dt = speed / pathToTree.Count;
+        float percent = (points.Length - startPointIndex)/pathToTree.Count;
+        float division;
+        int indexL, indexH;
+        while (percent < 1)
         {
-            float percent = 0;
-            float division;
-            int indexL, indexH;
-            while (percent < 1)
-            {
-                division = percent * (pathToTree.Count - 1);
-                indexL = Mathf.FloorToInt(division);
-                indexH = Mathf.CeilToInt(division);
-                testDot.position = Vector3.Lerp(pathToTree[indexL], pathToTree[indexH], indexH - indexL > 0 ? (division - indexL) / (indexH - indexL) : 1);
+            division = percent * (pathToTree.Count - 1);
+            indexL = Mathf.FloorToInt(division);
+            indexH = Mathf.CeilToInt(division);
+            tf.position = Vector3.Lerp(pathToTree[indexL], pathToTree[indexH], indexH - indexL > 0 ? (division - indexL) / (indexH - indexL) : 1);
 
-                percent += Time.deltaTime * dt;
-                yield return null;
-            }
+            percent += Time.deltaTime * dt;
+            yield return null;
         }
     }
 }
