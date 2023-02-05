@@ -7,16 +7,29 @@ public enum ResourceType
     NONE,
     WATER,
     MINERAL,
-    SWAMP
+    SKULL
 }
 
 public class CollectableSpot : MonoBehaviour
 {
     public Collider2D spotCollider;
-    public Color color;
-    public List<RootSpot> spots = new List<RootSpot>();
     public Transform resourcePrefab;
     public ResourceType type;
+    public float startingResources = 4;
+    float resources;
+    private SpriteRenderer sr;
+    private AnimationCurve fadeCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1, 2, -2));
+
+    List<RootSpot> spots = new List<RootSpot>();
+    private List<Transform> resourcePool = new List<Transform>();
+    PlayManager manager;
+
+    public void Init(PlayManager manager)
+    {
+        this.manager = manager;
+        resources = startingResources;
+        sr = spotCollider.GetComponent<SpriteRenderer>();
+    }
 
     public bool CollidesWith(Vector2 point)
     {
@@ -30,8 +43,26 @@ public class CollectableSpot : MonoBehaviour
         root.onGrowingComplete += () => { StartCollecting(newSpot); };
     }
 
+    public void SendResources()
+    {
+        for(int i=0; i<spots.Count; i++)
+        {
+            if(spots[i].waitedForGrow)
+            {
+                StartCollecting(i);
+            }
+        }
+    }
+
     void StartCollecting(int index)
     {
+        spots[index].waitedForGrow = true;
+
+        if(resources <= 0)
+        {
+            return;
+        }
+
         if (spots[index].collecting != null)
             StopCoroutine(spots[index].collecting);
         spots[index].collecting = StartCoroutine(Collect(index));
@@ -40,21 +71,27 @@ public class CollectableSpot : MonoBehaviour
     IEnumerator Collect(int index)
     {
         yield return new WaitForSeconds(Random.Range(0, 1f));
-        Transform resource = Instantiate(resourcePrefab, transform);
-
-        while(true)
+        Transform resource;
+        if (resourcePool.Count > 0)
         {
-            yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
-
-            if(type == ResourceType.WATER)
-            {
-                UIManager.instance.waterMeter.IncrementValue(0.05f);
-            }
-            else if(type == ResourceType.MINERAL)
-            {
-                UIManager.instance.mineralMeter.IncrementValue(0.05f);
-            }
+            resource = resourcePool[resourcePool.Count - 1];
+            resourcePool.RemoveAt(resourcePool.Count - 1);
+            resource.gameObject.SetActive(true);
         }
+        else
+        {
+            resource = Instantiate(resourcePrefab, manager.transform);
+        }
+
+        resources -= manager.increment;
+        sr.color = new Color(1, 1, 1, fadeCurve.Evaluate(resources / startingResources));
+
+        yield return StartCoroutine(spots[index].root.AnimateOnPathToTree(resource, spots[index].spotIndex));
+
+        manager.Increment(type);
+
+        resource.gameObject.SetActive(false);
+        resourcePool.Add(resource);
     }
 
     [System.Serializable]
@@ -64,12 +101,14 @@ public class CollectableSpot : MonoBehaviour
         public int spotIndex;
         public RootLine root;
         public Coroutine collecting;
+        public bool waitedForGrow;
 
         public RootSpot(Vector2 spot, int spotIndex, RootLine root)
         {
             this.spot = spot;
             this.spotIndex = spotIndex;
             this.root = root;
+            waitedForGrow = false;
         }
     }
 }

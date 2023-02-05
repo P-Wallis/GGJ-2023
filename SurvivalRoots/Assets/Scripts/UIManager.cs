@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -18,4 +21,8 @@ public class UIManager : MonoBehaviour
 
     public ResourcesMeter waterMeter;
     public ResourcesMeter mineralMeter;
+    public Button endTurnButton;
+    public Button resetButton;
+    public DayVisualizer dayVisualizer;
+    public TextMeshProUGUI powerLevel;
 }
