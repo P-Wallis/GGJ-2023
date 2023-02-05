@@ -91,6 +91,7 @@ public class RootDraw : MonoBehaviour
                     cursor.SetActive(canDraw);
                     if (canDraw)
                     {
+                        manager.PlaySFX(SFX.HOVER);
                         cursor.transform.localScale = Vector3.one * (rootStart.maxRadius * 2);
                         cursor.transform.position = rootStart.point;
 
@@ -98,10 +99,12 @@ public class RootDraw : MonoBehaviour
                         {
                             if (manager.water < 1)
                             {
+                                manager.PlaySFX(SFX.ERROR);
                                 Debug.Log("Not Enough Water");
                             }
                             else
                             {
+                                manager.PlaySFX(SFX.CLICK);
                                 manager.SpendResources();
                                 CreatePlayerLine(rootStart.point, rootStart.pointIndex < 0 ? (-rootStart.pointIndex) + 1 : rootStart.parent == null ? 1 : rootStart.parent.ChildLevel + 1);
                                 currentRootStart = rootStart;

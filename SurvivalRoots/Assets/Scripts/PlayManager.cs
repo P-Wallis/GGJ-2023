@@ -17,6 +17,8 @@ public class PlayManager : MonoBehaviour
     public void PlaySFX(SFX fx) { soundManager.PlaySFX(fx); }
 
     public RootDraw drawer;
+
+    [Header("Object Generation")]
     public CollectableSpot waterPool, mineralChunk, deathPool;
     public GameObject rock;
     public GameObject[] plants;
@@ -29,10 +31,13 @@ public class PlayManager : MonoBehaviour
     private GamePhase phase;
     public GamePhase Phase { get { return phase; } }
 
+
+    [Header("Resources")]
     [Range(0, 4)] public float water;
     [Range(0, 4)] public float minerals;
 
     [Range(0,0.1f)]public float increment;
+    [Range(0, 4f)] public float waterDailyIncrease = 0.5f;
 
     void Start()
     {
@@ -128,18 +133,17 @@ public class PlayManager : MonoBehaviour
         {
             ui.dayVisualizer.AdvanceTimeOfDay();
             soundManager.TransitionMusicTo(MusicTrack.BACKGROUND);
+            PlaySFX(SFX.SUNRISE);
 
-            if (drawer.maxChildIndex < 5 && minerals >= 1)
+            water += waterDailyIncrease;
+            ui.waterMeter.SetValue(water);
+
+            if (drawer.maxChildIndex < 5 && minerals >= 2)
             {
+                SpendResources(ResourceType.MINERAL);
                 SpendResources(ResourceType.MINERAL);
                 drawer.maxChildIndex++;
                 ui.powerLevel.text = (drawer.maxChildIndex + 1).ToString();
-            }
-
-            if (water < 4 && minerals >= 1)
-            {
-                SpendResources(ResourceType.MINERAL);
-                RefundResources(ResourceType.WATER);
             }
 
             ui.endTurnButton.interactable = true;

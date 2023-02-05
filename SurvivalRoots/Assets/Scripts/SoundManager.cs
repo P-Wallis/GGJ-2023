@@ -8,7 +8,11 @@ public enum SFX
     GATHERING,
     GROWING,
     BREAK,
-    SUCCESS
+    SUCCESS,
+    ERROR,
+    HOVER,
+    CLICK,
+    SUNRISE
 }
 
 public enum MusicTrack
@@ -27,6 +31,10 @@ public class SoundManager : MonoBehaviour
         public AudioClip growing;
         public AudioClip breaking;
         public AudioClip success;
+        public AudioClip error;
+        public AudioClip hover;
+        public AudioClip click;
+        public AudioClip sunrise;
         public AudioMixerGroup effectsMixer;
         public string effectsMixerVolumeParameter;
     }
@@ -78,6 +86,10 @@ public class SoundManager : MonoBehaviour
         sfxDict.Add(SFX.GROWING, MakeSound(soundEffects.growing, soundEffects.effectsMixer));
         sfxDict.Add(SFX.BREAK, MakeSound(soundEffects.breaking, soundEffects.effectsMixer));
         sfxDict.Add(SFX.SUCCESS, MakeSound(soundEffects.success, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.ERROR, MakeSound(soundEffects.error, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.HOVER, MakeSound(soundEffects.hover, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.CLICK, MakeSound(soundEffects.click, soundEffects.effectsMixer));
+        sfxDict.Add(SFX.SUNRISE, MakeSound(soundEffects.sunrise, soundEffects.effectsMixer));
 
     }
 
