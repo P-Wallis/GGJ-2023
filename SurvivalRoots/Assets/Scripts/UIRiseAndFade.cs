@@ -84,5 +84,14 @@ public class UIRiseAndFade : MonoBehaviour
             percent += Time.deltaTime * dt;
             yield return null;
         }
+
+        if (image != null)
+        {
+            image.color = endColor;
+        }
+        if (text != null)
+        {
+            text.color = endColor;
+        }
     }
 }
