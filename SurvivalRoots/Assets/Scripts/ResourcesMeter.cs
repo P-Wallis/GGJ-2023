@@ -14,7 +14,7 @@ public class ResourcesMeter : MonoBehaviour
         value = inValue;
         for(int i=0; i<images.Length; i++)
         {
-            if(i < value-1)
+            if(i <= value-1)
             {
                 images[i].sprite = full;
             }
