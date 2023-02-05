@@ -45,23 +45,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffects:
-    gathering: {fileID: 0}
-    breaking: {fileID: 0}
-    success: {fileID: 0}
-    effectsMixer: {fileID: 0}
-    effectsMixerVolumeParameter: 
+    gathering: {fileID: 8300000, guid: b279179e3c7a09043a888ac30c124d25, type: 3}
+    breaking: {fileID: 8300000, guid: a1844e67cfdbfce44a930602307ea571, type: 3}
+    success: {fileID: 8300000, guid: 75a9a741ae96d4a46b28cdb6097cf9b8, type: 3}
+    effectsMixer: {fileID: -3005388615347964479, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
+    effectsMixerVolumeParameter: SFX
   music:
-    background: {fileID: 0}
-    backgroundMixer: {fileID: 0}
-    backgroundMixerVolumeParameter: 
-    danger: {fileID: 0}
-    dangerMixer: {fileID: 0}
-    dangerMixerVolumeParameter: 
-    growing: {fileID: 0}
-    growingMixer: {fileID: 0}
-    growingMixerVolumeParameter: 
+    background: {fileID: 8300000, guid: acf14c38dbb44d84ea8db106a4128a1b, type: 3}
+    backgroundMixer: {fileID: -2525630863225328834, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
+    backgroundMixerVolumeParameter: MusicBackgroundVolume
+    danger: {fileID: 8300000, guid: 0456ee59df0b64742a8d931460b6d686, type: 3}
+    dangerMixer: {fileID: 7370491575827418905, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
+    dangerMixerVolumeParameter: MusicDangerVolume
+    growing: {fileID: 8300000, guid: 78c2b8407c88fde45b4d957e3f464ef1, type: 3}
+    growingMixer: {fileID: 952702946825334436, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
+    growingMixerVolumeParameter: MusicGrowingVolume
   ambience:
-    nature: {fileID: 0}
-    ambienceMixer: {fileID: 0}
-    ambienceMixerVolumeParameter: 
+    nature: {fileID: 8300000, guid: 61dc1011db844ab4992d98ef7c64be74, type: 3}
+    ambienceMixer: {fileID: -8537958581408645085, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
+    ambienceMixerVolumeParameter: Ambience
   mixer: {fileID: 24100000, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
