@@ -49,19 +49,19 @@ MonoBehaviour:
     breaking: {fileID: 8300000, guid: a1844e67cfdbfce44a930602307ea571, type: 3}
     success: {fileID: 8300000, guid: 75a9a741ae96d4a46b28cdb6097cf9b8, type: 3}
     effectsMixer: {fileID: -3005388615347964479, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
-    effectsMixerVolumeParameter: 
+    effectsMixerVolumeParameter: SFX
   music:
     background: {fileID: 8300000, guid: acf14c38dbb44d84ea8db106a4128a1b, type: 3}
     backgroundMixer: {fileID: -2525630863225328834, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
-    backgroundMixerVolumeParameter: 
+    backgroundMixerVolumeParameter: MusicBackgroundVolume
     danger: {fileID: 8300000, guid: 0456ee59df0b64742a8d931460b6d686, type: 3}
     dangerMixer: {fileID: 7370491575827418905, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
-    dangerMixerVolumeParameter: 
+    dangerMixerVolumeParameter: MusicDangerVolume
     growing: {fileID: 8300000, guid: 78c2b8407c88fde45b4d957e3f464ef1, type: 3}
     growingMixer: {fileID: 952702946825334436, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
-    growingMixerVolumeParameter: 
+    growingMixerVolumeParameter: MusicGrowingVolume
   ambience:
     nature: {fileID: 8300000, guid: 61dc1011db844ab4992d98ef7c64be74, type: 3}
     ambienceMixer: {fileID: -8537958581408645085, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
-    ambienceMixerVolumeParameter: 
+    ambienceMixerVolumeParameter: Ambience
   mixer: {fileID: 24100000, guid: e3bb477431efc4ec399709cf172b90b8, type: 2}
