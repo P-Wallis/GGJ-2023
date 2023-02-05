@@ -48,11 +48,11 @@ public class CollectableSpot : MonoBehaviour
 
             if(type == ResourceType.WATER)
             {
-                UIManager.instance.waterMeter.IncrementValue(0.1f);
+                UIManager.instance.waterMeter.IncrementValue(0.05f);
             }
             else if(type == ResourceType.MINERAL)
             {
-                UIManager.instance.mineralMeter.IncrementValue(0.1f);
+                UIManager.instance.mineralMeter.IncrementValue(0.05f);
             }
         }
     }
