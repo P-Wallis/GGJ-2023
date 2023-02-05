@@ -1224,6 +1224,34 @@ MonoBehaviour:
   minerals: 2
   increment: 0.1
   waterDailyIncrease: 0.5
+  startZoom: 6
+  endZoom: 12
+  zoomIncrement: 1.5
+  zoomTime: 5
+  zoomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1338789742
 Transform:
   m_ObjectHideFlags: 0
